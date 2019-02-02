@@ -17,11 +17,11 @@ import frc.robot.commands.GrabberPrendreCmd;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.ElevateurSub;
 import frc.robot.subsystems.GrabberSub;
-import frc.robot.subsystems.LidarSub;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+//import frc.robot.subsystems.LidarSub;
+//import edu.wpi.first.wpilibj.I2C;
+//import edu.wpi.first.wpilibj.I2C.Port;
+//import java.nio.ByteBuffer;
+//import java.nio.IntBuffer;
 
 
 
@@ -37,10 +37,10 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static DriveBaseSub m_DriveBaseSub;
   public static RobotMap m_RobotMap;
-  public static LidarSub m_Lidar;
+ // public static LidarSub m_Lidar;
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
-  private IntBuffer status;
+  //private IntBuffer status;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,21 +51,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_RobotMap = new RobotMap();
     m_grabberSub = new GrabberSub();
     m_elevateur = new ElevateurSub();
-    m_RobotMap = new RobotMap();
     m_DriveBaseSub = new DriveBaseSub();
-    status = ByteBuffer.allocateDirect(4).asIntBuffer();
+   // status = ByteBuffer.allocateDirect(4).asIntBuffer();
      
-    try 
-        {
-        	m_Lidar = new LidarSub(I2C.Port.kMXP);
-          m_Lidar.start();
-    	}
-        catch( Exception ex ) 
-        {        	
-        	m_Lidar = null;
-        }
+    //try 
+     //   {
+   //     	m_Lidar = new LidarSub(I2C.Port.kMXP);
+    //      m_Lidar.start();
+    //	}
+    //    catch( Exception ex ) 
+    //    {        	
+     //   	m_Lidar = null;
+     //   }
     m_oi = new OI();
 
 
@@ -142,11 +142,11 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    status = ByteBuffer.allocateDirect(4).asIntBuffer();
-    if ( m_Lidar != null )
-    {
-      m_Lidar.start();
-    }
+    //status = ByteBuffer.allocateDirect(4).asIntBuffer();
+    //if ( m_Lidar != null )
+    //{
+    //  m_Lidar.start();
+   // }
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -159,7 +159,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
-    SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
+   // SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
 
   }
 

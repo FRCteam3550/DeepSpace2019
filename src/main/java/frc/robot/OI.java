@@ -10,9 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Aspirer;
 import frc.robot.commands.ElevatorDown;
 import frc.robot.commands.ElevatorUpBalls;
 import frc.robot.commands.ElevatorUpHatch;
+import frc.robot.commands.Rejeter;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,6 +35,12 @@ Joystick pilote;
 
     Button b3 = new JoystickButton(pilote, 3);
     b3.whenPressed(new ElevatorUpBalls());
+
+    Button b4 = new JoystickButton(pilote, 4);
+    b4.whileHeld(new Aspirer());
+
+    Button b5 = new JoystickButton(pilote, 5);
+    b5.whileHeld(new Rejeter());
 
   }
 

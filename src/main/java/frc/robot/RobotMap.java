@@ -36,39 +36,68 @@ public class RobotMap {
   
   //public static int RightFrontMotor = 3;
   //public static int RightBackMotor = 4; TalonSRX(1);
+  public static SpeedController LeftFrontMotor;
+  public static SpeedController LeftBackMotor ;
+  public static SpeedController RightFrontMotor;
+  public static SpeedController RightBackMotor ;
 
-    // Drive Train
-  public static SpeedController LeftFrontMotor  = new WPI_TalonSRX(0);
-  public static SpeedController LeftBackMotor   = new WPI_TalonSRX(1);
-  public static SpeedController RightFrontMotor = new WPI_TalonSRX(2);
-  public static SpeedController RightBackMotor  = new WPI_TalonSRX(3);
-  public static Encoder rightEncoder = new Encoder(0 , 1);
-  public static Encoder leftEncoder = new Encoder(1 , 0);
-  //public static Encoder rightFrontEncoder = new Encoder(2 , 1);
-  //public static Encoder leftFrontEncoder = new Encoder(3 , 0);
+  public static DigitalInput DriveTrainLightSensorL;
+  public static DigitalInput DriveTrainLightSensorR;
 
-  public static DigitalInput DriveTrainLightSensorL = new DigitalInput(4);
-  public static DigitalInput DriveTrainLightSensorR = new DigitalInput(5);
+  public static SpeedController elevatorMotor;
+  public static Encoder elevatoEncoder;
 
-    //elevator
-  public static SpeedController elevatorMotor = new WPI_TalonSRX(4);
-  public static DigitalInput limitSwitch1;
-  public static DigitalInput limitSwitch2;
-  public static Encoder elevatoEncoder = new Encoder(0 , 1 , false , EncodingType.k4X);
-    
-  
-  //aArm
-  public static SpeedController armMotor = new WPI_TalonSRX(4);
-  public static DigitalInput armLimit1;
-  public static DigitalInput armLimit2;
-  public static Encoder armEncoder = new Encoder(0 , 1 , false , EncodingType.k4X);
+  public static SpeedController armMotor;
+ 
+  public static Encoder armEncoder;
 
 
     //Wrist
-  public static SpeedController wristMotor = new WPI_TalonSRX(5);
+  public static SpeedController wristMotor;
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
-  public static DigitalInput LightSensorWrist = new DigitalInput(6);
+
+  public static DigitalInput LightSensorWrist;
+
+
+ // public static DigitalInput limitSwitch1;
+  //public static DigitalInput limitSwitch2;
+
+ // public static DigitalInput armLimit1;
+  //public static DigitalInput armLimit2;
+
+public RobotMap() {
+    // Drive Train
+  LeftFrontMotor  = new WPI_TalonSRX(4);
+  LeftBackMotor   = new WPI_TalonSRX(5);
+  RightFrontMotor = new WPI_TalonSRX(2);
+  RightBackMotor  = new WPI_TalonSRX(1);
+  //public static Encoder rightEncoder = new Encoder(0 , 1);
+  //public static Encoder leftEncoder = new Encoder(2 , 3);
+  //public static Encoder rightFrontEncoder = new Encoder(2 , 1);
+  //public static Encoder leftFrontEncoder = new Encoder(3 , 0);
+
+  DriveTrainLightSensorL = new DigitalInput(8);
+  DriveTrainLightSensorR = new DigitalInput(9);
+
+    //elevator
+  elevatorMotor = new WPI_TalonSRX(7);
+  elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
+    
+  
+  //aArm
+  armMotor = new WPI_TalonSRX(6);
+ 
+  armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
+
+
+    //Wrist
+  wristMotor = new WPI_TalonSRX(3);
+ // public static DigitalInput wrsistLimit1;
+ // public static DigitalInput wrsistLimit2;
+
+  LightSensorWrist = new DigitalInput(1);
+
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
 
@@ -83,4 +112,5 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
+}
 }

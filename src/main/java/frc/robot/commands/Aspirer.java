@@ -10,23 +10,26 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArcadeDrive extends Command {
-  public ArcadeDrive() {
+public class Aspirer extends Command {
+  public Aspirer() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_DriveBaseSub);
+     requires(Robot.m_grabberSub);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_DriveBaseSub.stopRobot();
+    Robot.m_grabberSub.stopArmMotor();
+    Robot.m_grabberSub.stopWristMotor();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.returnPilote().getY(), Robot.m_oi.returnPilote().getX());
+    Robot.m_grabberSub.aspirer();
   }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -37,7 +40,7 @@ public class ArcadeDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_DriveBaseSub.stopRobot();
+    Robot.m_grabberSub.stopWristMotor();
   }
 
   // Called when another command which requires one or more of the same

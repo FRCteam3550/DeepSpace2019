@@ -55,7 +55,9 @@ public class DriveBaseSub extends Subsystem {
     } catch (RuntimeException ex ) {
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
-    m_LeftBackMotor.setInverted(false);
+    m_LeftFrontMotor.setInverted(true);
+    m_LeftBackMotor.setInverted(true);
+    //m_LeftBackMotor.setInverted(false);
     m_RightBackMotor.setInverted(true);
     m_RightFrontMotor.setInverted(true);
     m_LeftControlGroup = new SpeedControllerGroup(m_LeftFrontMotor, m_LeftBackMotor);
