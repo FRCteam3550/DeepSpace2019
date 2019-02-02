@@ -8,6 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ElevatorDown;
+import frc.robot.commands.ElevatorUp;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,11 +23,21 @@ Joystick pilote;
 
   public OI(){
     pilote = new Joystick(1);
+
+    Button b1 = new JoystickButton(pilote , 1);
+    b1.whileHeld(new ElevatorUp());
+
+    Button b2 = new JoystickButton(pilote, 2);
+    b2.whileHeld(new ElevatorDown());
+
   }
 
   public Joystick returnPilote(){
     return pilote;
   }
+
+
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -51,4 +65,6 @@ Joystick pilote;
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+
 }

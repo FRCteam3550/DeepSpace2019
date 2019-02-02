@@ -15,11 +15,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.GrabberPrendreCmd;
 //import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveBaseSub;
+import frc.robot.subsystems.ElevateurSub;
+import frc.robot.subsystems.GrabberSub;
 import frc.robot.subsystems.LidarSub;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +38,8 @@ public class Robot extends TimedRobot {
   public static DriveBaseSub m_DriveBaseSub;
   public static RobotMap m_RobotMap;
   public static LidarSub m_Lidar;
+  public static ElevateurSub m_elevateur;
+  public static GrabberSub m_grabberSub;
   private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -45,10 +51,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_grabberSub = new GrabberSub();
+    m_elevateur = new ElevateurSub();
     m_RobotMap = new RobotMap();
     m_DriveBaseSub = new DriveBaseSub();
     status = ByteBuffer.allocateDirect(4).asIntBuffer();
-        try 
+     
+    try 
         {
         	m_Lidar = new LidarSub(I2C.Port.kMXP);
           m_Lidar.start();

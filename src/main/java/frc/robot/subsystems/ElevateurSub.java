@@ -7,7 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+import frc.robot.commands.StopRobot;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -15,10 +21,64 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ElevateurSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  private static SpeedController m_elevator = RobotMap.elevatorMotor;
+  private static DigitalInput m_limitSwitch1 = RobotMap.limitSwitch1;
+  private static DigitalInput m_limitSwitch2 = RobotMap.limitSwitch2;
+  private static Encoder m_encodeur = RobotMap.elevatoEncoder;
+
+
+  //limit switch en bas
+ // boolean Value1 = m_limitSwitch1.get();
+
+  //limit switch en haut
+ // boolean Value2 = m_limitSwitch2.get();
+
+  
+
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+     setDefaultCommand(new StopRobot());
   }
+
+  public boolean getLimit1(){
+    return  m_limitSwitch1.get();
+  }
+
+  public boolean getLimit2(){
+    return  m_limitSwitch2.get();
+  }
+  
+  
+  public void stop(){
+    m_elevator.set(0);
+  }
+
+  //elevator up and when it hits the top limitSwitch it stops the motor
+  public void elevatorUp(){
+    m_elevator.set(0.5);
+
+    boolean LimitSwitchOpen = true;
+
+    if (getLimit1()== LimitSwitchOpen ){
+      stop();
+    }
+
+    
+
+  }
+
+  //when the elevator is down and it hits the limit switch is hit, stop the motor
+  public void elevatorDown(){
+    m_elevator.set(-0.5);
+
+    boolean LimitSwitchClosed = false;
+
+    if (getLimit2() == LimitSwitchClosed ){
+      stop();
+    }
+
+  }
+
 }

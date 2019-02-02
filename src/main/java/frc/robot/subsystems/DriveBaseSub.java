@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -38,6 +39,10 @@ public class DriveBaseSub extends Subsystem {
   private SpeedController m_LeftBackMotor = RobotMap.LeftBackMotor;
   private SpeedController m_RightFrontMotor = RobotMap.RightFrontMotor;
   private SpeedController m_RightBackMotor = RobotMap.RightBackMotor;
+
+  //photo switch
+  private static DigitalInput m_driveTrainLightSensorL = RobotMap.DriveTrainLightSensorL;
+  private static DigitalInput m_driveTrainLightSensorR = RobotMap.DriveTrainLightSensorR;
 
   
 

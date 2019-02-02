@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -35,12 +37,43 @@ public class RobotMap {
   //public static int RightFrontMotor = 3;
   //public static int RightBackMotor = 4; TalonSRX(1);
 
-  public static SpeedController LeftFrontMotor  = new WPI_TalonSRX(1);
-  public static SpeedController LeftBackMotor   = new WPI_TalonSRX(2);
-  public static SpeedController RightFrontMotor = new WPI_TalonSRX(3);
-  public static SpeedController RightBackMotor  = new WPI_TalonSRX(4);
-  public static Encoder encodeur = new Encoder(0 , 1 , false , EncodingType.k4X);
+    // Drive Train
+  public static SpeedController LeftFrontMotor  = new WPI_TalonSRX(0);
+  public static SpeedController LeftBackMotor   = new WPI_TalonSRX(1);
+  public static SpeedController RightFrontMotor = new WPI_TalonSRX(2);
+  public static SpeedController RightBackMotor  = new WPI_TalonSRX(3);
+  public static Encoder rightEncoder = new Encoder(0 , 1);
+  public static Encoder leftEncoder = new Encoder(1 , 0);
+  //public static Encoder rightFrontEncoder = new Encoder(2 , 1);
+  //public static Encoder leftFrontEncoder = new Encoder(3 , 0);
+
+  public static DigitalInput DriveTrainLightSensorL = new DigitalInput(4);
+  public static DigitalInput DriveTrainLightSensorR = new DigitalInput(5);
+
+    //elevator
+  public static SpeedController elevatorMotor = new WPI_TalonSRX(4);
+  public static DigitalInput limitSwitch1;
+  public static DigitalInput limitSwitch2;
+  public static Encoder elevatoEncoder = new Encoder(0 , 1 , false , EncodingType.k4X);
+    
   
+  //aArm
+  public static SpeedController armMotor = new WPI_TalonSRX(4);
+  public static DigitalInput armLimit1;
+  public static DigitalInput armLimit2;
+  public static Encoder armEncoder = new Encoder(0 , 1 , false , EncodingType.k4X);
+
+
+    //Wrist
+  public static SpeedController wristMotor = new WPI_TalonSRX(5);
+ // public static DigitalInput wrsistLimit1;
+ // public static DigitalInput wrsistLimit2;
+  public static DigitalInput LightSensorWrist = new DigitalInput(6);
+  //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
+  
+
+
+
 
 
 
