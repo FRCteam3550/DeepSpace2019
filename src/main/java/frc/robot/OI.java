@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ElevatorDown;
-import frc.robot.commands.ElevatorUp;
+import frc.robot.commands.ElevatorUpBalls;
+import frc.robot.commands.ElevatorUpHatch;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,12 +26,16 @@ Joystick pilote;
     pilote = new Joystick(1);
 
     Button b1 = new JoystickButton(pilote , 1);
-    b1.whileHeld(new ElevatorUp());
+    b1.whenPressed(new ElevatorUpHatch());
 
     Button b2 = new JoystickButton(pilote, 2);
-    b2.whileHeld(new ElevatorDown());
+    b2.whenPressed(new ElevatorDown());
+
+    Button b3 = new JoystickButton(pilote, 3);
+    b3.whenPressed(new ElevatorUpBalls());
 
   }
+
 
   public Joystick returnPilote(){
     return pilote;

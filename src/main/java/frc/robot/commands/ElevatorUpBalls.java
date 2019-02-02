@@ -14,8 +14,8 @@ import frc.robot.subsystems.ElevateurSub;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ElevatorUp extends Command {
-  public ElevatorUp() {
+public class ElevatorUpBalls extends Command {
+  public ElevatorUpBalls() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_elevateur);
   }
@@ -29,7 +29,7 @@ public class ElevatorUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevateur.elevatorUp();
+    Robot.m_elevateur.elevatorUpBalls();
   }
 
   // Make this return true when this Command no longer needs to run execute()

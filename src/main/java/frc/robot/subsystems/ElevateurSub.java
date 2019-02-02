@@ -27,13 +27,22 @@ public class ElevateurSub extends Subsystem {
   private static Encoder m_encodeur = RobotMap.elevatoEncoder;
 
 
+
   //limit switch en bas
  // boolean Value1 = m_limitSwitch1.get();
 
   //limit switch en haut
  // boolean Value2 = m_limitSwitch2.get();
 
-  
+ /* public void DistanceHatch1(Encoder m_Encoder){
+    m_Encoder.setDistancePerPulse(0);
+  } */
+
+
+
+  public int getPosition(){
+    return m_encodeur.get();
+  }
 
 
   @Override
@@ -56,7 +65,7 @@ public class ElevateurSub extends Subsystem {
   }
 
   //elevator up and when it hits the top limitSwitch it stops the motor
-  public void elevatorUp(){
+  public void elevatorUpHatch(){
     m_elevator.set(0.5);
 
     boolean LimitSwitchOpen = true;
@@ -65,20 +74,72 @@ public class ElevateurSub extends Subsystem {
       stop();
     }
 
-    
+    else if  (getPosition() == 0) {
+      if (getPosition() != 50){
+        m_elevator.set(0.5);
+      }else{
+        stop();
+      }
+    }
 
+    else if  (getPosition() == 50) {
+      if (getPosition() != 100){
+        m_elevator.set(0.5);}
+      else{
+      stop();
+    }
+  }
   }
 
-  //when the elevator is down and it hits the limit switch is hit, stop the motor
-  public void elevatorDown(){
+  public void elevatorUpBalls(){
     m_elevator.set(-0.5);
 
-    boolean LimitSwitchClosed = false;
+    boolean LimitSwitchOpen = true;
 
-    if (getLimit2() == LimitSwitchClosed ){
+    if (getLimit1()== LimitSwitchOpen ){
       stop();
     }
 
+    else if  (getPosition() == 0) {
+      if (getPosition() !=20){
+        m_elevator.set(0.5);
+      }else{
+        stop();
+      }
+    }
+
+    else if  (getPosition() == 20) {
+      if (getPosition() != 80){
+        m_elevator.set(0.5);}
+      else{
+      stop();
+    }
   }
+
+  else if  (getPosition() == 80) {
+    if (getPosition() != 130){
+      m_elevator.set(0.5);}
+    else{
+    stop();
+  }
+}
+
+    
+
+}
+
+  //when the elevator is down and it hits the limit switch is hit, stop the motor
+  public void elevatorDown(){
+    boolean LimitSwitchClosed = false;
+
+   if (LimitSwitchClosed != getLimit2()){
+    m_elevator.set(-0.5);
+   }else{
+     stop();
+    }
+
+  }
+
+
 
 }
