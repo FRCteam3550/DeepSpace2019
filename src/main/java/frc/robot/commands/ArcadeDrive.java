@@ -10,10 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+//import TronixLib.TuningPilotAxis;
+
 /**
  * An example command.  You can replace me with your own command.
  */
 public class ArcadeDrive extends Command {
+  //TuningPilotAxis m_forwardtuning;
+  //TuningPilotAxis m_rotatetuning;
+
   public ArcadeDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_DriveBaseSub);
@@ -28,6 +33,10 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //double forward  = m_forwardtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
+    //double rotation = m_rotatedtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
+    //Robot.m_DriveBaseSub.arcadeDrive(forward, rotation);
+
     Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.returnPilote().getX(),Robot.m_oi.returnPilote().getY());
   }
 
