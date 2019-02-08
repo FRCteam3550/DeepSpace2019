@@ -23,9 +23,13 @@ import frc.robot.commands.Rejeter;
 public class OI {
 
 Joystick pilote;
+//TuningPilotAxis m_pilotforwardtuning;
+//TuningPilotAxis m_pilotrotatetuning;
 
   public OI(){
     pilote = new Joystick(1);
+//    m_pilotforwardtuning = new TuningPilotAxis  // Still mode 0 : no tuning
+//    m_pilotrotatetuning  = new TuningPilotAxis  // Still mode 0 : no tuning
 
     Button b1 = new JoystickButton(pilote , 1);
     b1.whenPressed(new ElevatorUpHatch());
@@ -49,6 +53,13 @@ Joystick pilote;
     return pilote;
   }
 
+//  public Joystick returnPiloteForwardTuning(){
+//    return m_pilotforwardtuning;
+//  }
+
+//  public Joystick returnPiloteRotationTuning(){
+//    return m_pilotrotationtuning;
+//  }
 
 
   //// CREATING BUTTONS
