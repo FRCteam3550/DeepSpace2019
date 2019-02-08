@@ -15,6 +15,7 @@ import frc.robot.commands.ElevatorDown;
 import frc.robot.commands.ElevatorUpBalls;
 import frc.robot.commands.ElevatorUpHatch;
 import frc.robot.commands.Rejeter;
+import frc.robot.commands.commandsGroup.TestCmdGroup;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,6 +46,9 @@ Joystick pilote;
 
     Button b5 = new JoystickButton(pilote, 5);
     b5.whileHeld(new Rejeter());
+
+    Button b6 = new JoystickButton(pilote, 6);
+    b6.whenPressed(new TestCmdGroup());
 
   }
 
