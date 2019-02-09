@@ -10,7 +10,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import TronixLib.DifferentialDriveTronix;
+
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 
@@ -33,7 +36,7 @@ public class DriveBaseSub extends Subsystem {
   private SpeedControllerGroup m_LeftControlGroup;
   private SpeedControllerGroup m_RightControlGroup;
 
-  private DifferentialDrive m_DiffDrive;
+  private DifferentialDriveTronix m_DiffDrive;
 
   private SpeedController m_LeftFrontMotor = RobotMap.LeftFrontMotor;
   private SpeedController m_LeftBackMotor = RobotMap.LeftBackMotor;
@@ -63,7 +66,7 @@ public class DriveBaseSub extends Subsystem {
     m_LeftControlGroup = new SpeedControllerGroup(m_LeftFrontMotor, m_LeftBackMotor);
     m_RightControlGroup = new SpeedControllerGroup(m_RightFrontMotor, m_RightBackMotor);
 
-    m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
+    m_DiffDrive = new DifferentialDriveTronix(m_LeftControlGroup, m_RightControlGroup);
 
   }
 
@@ -81,15 +84,11 @@ public class DriveBaseSub extends Subsystem {
 
 
   public void arcadeDrive(double xSpeed, double zRotation) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation);
-  }
-
-  public void arcadeDrive(double xSpeed, double zRotation , boolean squareInputs) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, squareInputs);
+    m_DiffDrive.arcadeDrive(xSpeed, zRotation, 0,  0);
   }
 
   public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, isQuickTurn);
+    m_DiffDrive.arcadeDrive(xSpeed, zRotation, 0, 0);
 
   }
 
