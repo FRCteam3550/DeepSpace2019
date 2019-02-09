@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.GrabberPrendreCmd;
+import frc.robot.commands.TestDashboardSetupCmd;
+import frc.robot.commands.commandsGroup.TestCmdGroup;
 import frc.robot.subsystems.Arm;
 //import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveBaseSub;
@@ -75,6 +77,13 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    
+    
+    SmartDashboard.putData("Test the command group", new TestCmdGroup());
+    SmartDashboard.putData("Reset the command group test", new TestDashboardSetupCmd());
+    SmartDashboard.putData(m_arm);
+    SmartDashboard.putData(m_elevateur);
+    SmartDashboard.putData(m_grabberSub);
   }
 
   /**

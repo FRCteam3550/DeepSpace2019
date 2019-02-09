@@ -8,14 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.Timer;
 
-public class TestDashboardCmd extends Command {
+public class TestCommandLineCmd extends Command {
 
   private boolean m_finished = false;
 
-  public TestDashboardCmd() {
+  public TestCommandLineCmd() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -28,12 +26,9 @@ public class TestDashboardCmd extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("----------Running TestDashboardCdm----------");
-    SmartDashboard.putBoolean("TestBoolean", true);
-    for(int TestNumber = 0; TestNumber <= 100; TestNumber++) {
-      SmartDashboard.putNumber("TestNumber", TestNumber);
-      Timer.delay(0.5);
-    }
+    System.out.println("----------Running TestCommandLineCmd----------");
+    System.out.println("Will this work?");
+    System.out.println("It should.");
     m_finished = true;
   }
 
