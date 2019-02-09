@@ -17,6 +17,7 @@ import frc.robot.commands.ElevatorUpBalls;
 import frc.robot.commands.ElevatorUpHatch;
 import frc.robot.commands.FirstLevel;
 import frc.robot.commands.Rejeter;
+import frc.robot.commands.commandsGroup.TestCmdGroup;
 import frc.robot.commands.SecondLevel;
 
 /**
@@ -26,9 +27,13 @@ import frc.robot.commands.SecondLevel;
 public class OI {
 
 Joystick pilote;
+//TuningPilotAxis m_pilotforwardtuning;
+//TuningPilotAxis m_pilotrotatetuning;
 
   public OI(){
     pilote = new Joystick(1);
+//    m_pilotforwardtuning = new TuningPilotAxis  // Still mode 0 : no tuning
+//    m_pilotrotatetuning  = new TuningPilotAxis  // Still mode 0 : no tuning
 
     Button b1 = new JoystickButton(pilote , 1);
     b1.whenPressed(new SecondLevel());
@@ -45,6 +50,9 @@ Joystick pilote;
     Button b5 = new JoystickButton(pilote, 5);
     b5.whileHeld(new Rejeter());
 
+    Button b6 = new JoystickButton(pilote, 6);
+    b6.whenPressed(new TestCmdGroup());
+
   }
 
 
@@ -52,6 +60,13 @@ Joystick pilote;
     return pilote;
   }
 
+//  public Joystick returnPiloteForwardTuning(){
+//    return m_pilotforwardtuning;
+//  }
+
+//  public Joystick returnPiloteRotationTuning(){
+//    return m_pilotrotationtuning;
+//  }
 
 
   //// CREATING BUTTONS
