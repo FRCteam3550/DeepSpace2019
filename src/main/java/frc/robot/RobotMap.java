@@ -51,7 +51,6 @@ public class RobotMap {
  
   public static Encoder armEncoder;
 
-
     //Wrist
   public static SpeedController wristMotor;
  // public static DigitalInput wrsistLimit1;
@@ -68,10 +67,10 @@ public class RobotMap {
 
 public RobotMap() {
     // Drive Train
-  LeftFrontMotor  = new WPI_TalonSRX(4);
+  LeftFrontMotor  = new WPI_TalonSRX(3);
   LeftBackMotor   = new WPI_TalonSRX(5);
-  RightFrontMotor = new WPI_TalonSRX(2);
-  RightBackMotor  = new WPI_TalonSRX(1);
+  RightFrontMotor = new WPI_TalonSRX(6);
+  RightBackMotor  = new WPI_TalonSRX(7);
   //public static Encoder rightEncoder = new Encoder(0 , 1);
   //public static Encoder leftEncoder = new Encoder(2 , 3);
   //public static Encoder rightFrontEncoder = new Encoder(2 , 1);
@@ -81,18 +80,17 @@ public RobotMap() {
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
-  elevatorMotor = new WPI_TalonSRX(7);
+  elevatorMotor = new WPI_TalonSRX(1);
   elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
     
   
   //aArm
-  armMotor = new WPI_TalonSRX(6);
+  armMotor = new WPI_TalonSRX(4);
  
   armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 
-
     //Wrist
-  wristMotor = new WPI_TalonSRX(3);
+  wristMotor = new WPI_TalonSRX(2);
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
 
@@ -100,11 +98,6 @@ public RobotMap() {
 
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
-
-
-
-
-
 
   //public static int NavX
 

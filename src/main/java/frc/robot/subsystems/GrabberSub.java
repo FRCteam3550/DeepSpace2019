@@ -26,7 +26,7 @@ public class GrabberSub extends Subsystem {
   // here. Call these from Commands.
 
   //rotating arm
-  private static SpeedController m_armMotor = RobotMap.armMotor;
+  //private static SpeedController m_armMotor = RobotMap.armMotor;
  // private static DigitalInput m_armLimit1 = RobotMap.armLimit1;
  // private static DigitalInput m_armLimit2 = RobotMap.armLimit2;
   private static Encoder m_armEncoder = RobotMap.armEncoder;
@@ -61,19 +61,19 @@ public class GrabberSub extends Subsystem {
     return m_armLimit2.get();
   } */
 
-  public void stopArmMotor(){
-    m_armMotor.set(0);
-  }
+ // public void stopArmMotor(){
+   // m_armMotor.set(0);
+  //}
 
   //faire baisser le bras
-  public void rotateArmD(){
-    m_armMotor.set(0.1);
-  }
+  //public void rotateArmD(){
+   // m_armMotor.set(0.5);
+  //}
   
   //faire monter le bras
-  public void rotateArmU(){
-    m_armMotor.set(-0.1);
-  }
+  //public void rotateArmU(){
+   // m_armMotor.set(-0.5);
+  //}
 
   public void stopWristMotor(){
     m_wristMotor.set(0);

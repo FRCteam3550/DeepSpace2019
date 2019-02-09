@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.GrabberPrendreCmd;
+import frc.robot.subsystems.Arm;
 //import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.ElevateurSub;
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
  // public static LidarSub m_Lidar;
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
+  public static Arm m_arm;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -54,6 +56,7 @@ public class Robot extends TimedRobot {
     m_RobotMap = new RobotMap();
     m_grabberSub = new GrabberSub();
     m_elevateur = new ElevateurSub();
+    m_arm = new Arm();
     m_DriveBaseSub = new DriveBaseSub();
    // status = ByteBuffer.allocateDirect(4).asIntBuffer();
      
