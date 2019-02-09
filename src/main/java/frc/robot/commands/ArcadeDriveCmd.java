@@ -10,14 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-//import TronixLib.TuningPilotAxis;
-
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ArcadeDrive extends Command {
+public class ArcadeDriveCmd extends Command {
 
-  public ArcadeDrive() {
+  public ArcadeDriveCmd() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_DriveBaseSub);
   }
