@@ -35,11 +35,10 @@ public class DriveBaseSub extends Subsystem {
 
   private DifferentialDrive m_DiffDrive;
 
-  private SpeedController m_LeftFrontMotor = RobotMap.LeftFrontMotor;
-  private SpeedController m_LeftBackMotor = RobotMap.LeftBackMotor;
-  private SpeedController m_RightFrontMotor = RobotMap.RightFrontMotor;
-  private SpeedController m_RightBackMotor = RobotMap.RightBackMotor;
-
+  private static SpeedController m_leftFront = RobotMap.LeftFrontMotor;
+  private static SpeedController m_leftBack = RobotMap.LeftBackMotor;
+  private static SpeedController m_RightFront = RobotMap.RightFrontMotor;
+  private static SpeedController m_RightBack = RobotMap.RightBackMotor;
   //photo switch
   private static DigitalInput m_driveTrainLightSensorL = RobotMap.DriveTrainLightSensorL;
   private static DigitalInput m_driveTrainLightSensorR = RobotMap.DriveTrainLightSensorR;
@@ -55,13 +54,13 @@ public class DriveBaseSub extends Subsystem {
     } catch (RuntimeException ex ) {
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
-    m_LeftFrontMotor.setInverted(true);
-    m_LeftBackMotor.setInverted(true);
+    m_leftFront.setInverted(true);
+    m_leftBack.setInverted(true);
     //m_LeftBackMotor.setInverted(false);
-    m_RightBackMotor.setInverted(true);
-    m_RightFrontMotor.setInverted(true);
-    m_LeftControlGroup = new SpeedControllerGroup(m_LeftFrontMotor, m_LeftBackMotor);
-    m_RightControlGroup = new SpeedControllerGroup(m_RightFrontMotor, m_RightBackMotor);
+    m_RightBack.setInverted(true);
+    m_RightFront.setInverted(true);
+    m_LeftControlGroup = new SpeedControllerGroup(m_leftFront, m_leftBack);
+    m_RightControlGroup = new SpeedControllerGroup(m_RightFront, m_RightBack);
 
     m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
 

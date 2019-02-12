@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -44,7 +45,7 @@ public class RobotMap {
   public static DigitalInput DriveTrainLightSensorL;
   public static DigitalInput DriveTrainLightSensorR;
 
-  public static SpeedController elevatorMotor;
+  public static TalonSRX elevatorMotor;
   public static Encoder elevatoEncoder;
 
   public static SpeedController armMotor;
@@ -67,30 +68,26 @@ public class RobotMap {
 
 public RobotMap() {
     // Drive Train
-  LeftFrontMotor  = new WPI_TalonSRX(3);
-  LeftBackMotor   = new WPI_TalonSRX(5);
-  RightFrontMotor = new WPI_TalonSRX(6);
-  RightBackMotor  = new WPI_TalonSRX(7);
-  //public static Encoder rightEncoder = new Encoder(0 , 1);
-  //public static Encoder leftEncoder = new Encoder(2 , 3);
-  //public static Encoder rightFrontEncoder = new Encoder(2 , 1);
-  //public static Encoder leftFrontEncoder = new Encoder(3 , 0);
+  LeftFrontMotor  = new WPI_VictorSPX(2);
+  LeftBackMotor   = new WPI_VictorSPX(1);
+  RightFrontMotor = new WPI_VictorSPX(4);
+  RightBackMotor  = new WPI_VictorSPX(3);
 
   DriveTrainLightSensorL = new DigitalInput(8);
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
-  elevatorMotor = new WPI_TalonSRX(1);
+  elevatorMotor = new TalonSRX(5);
   elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
     
   
   //aArm
-  armMotor = new WPI_TalonSRX(4);
+  armMotor = new WPI_TalonSRX(6);
  
   armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 
     //Wrist
-  wristMotor = new WPI_TalonSRX(2);
+  wristMotor = new WPI_TalonSRX(7);
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
 

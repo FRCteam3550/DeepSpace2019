@@ -6,11 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+import java.io.ObjectInputFilter.Config;
+
+import javax.management.loading.PrivateMLet;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.StopRobot;
@@ -21,11 +29,19 @@ import frc.robot.commands.StopRobot;
 public class ElevateurSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private static SpeedController m_elevator = RobotMap.elevatorMotor;
- // private static DigitalInput m_limitSwitch1 = RobotMap.limitSwitch1;
-  //private static DigitalInput m_limitSwitch2 = RobotMap.limitSwitch2;
-  private static Encoder m_encodeur = RobotMap.elevatoEncoder;
 
+  private static TalonSRX m_elevator = RobotMap.elevatorMotor;
+
+
+ public ElevateurSub(){
+  m_elevator.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+ // m_elevator.set(ControlMode.Position , 0);
+ }
+
+
+ public double getSensorValue(){
+   return m_elevator.getSensorCollection().getPulseWidthPosition();
+ } 
 
 
   //limit switch en bas
@@ -38,12 +54,9 @@ public class ElevateurSub extends Subsystem {
     m_Encoder.setDistancePerPulse(0);
   } */
 
-
-
  /* public int getPosition(){
     return m_encodeur.get();
   } */
-
 
   @Override
   public void initDefaultCommand() {
@@ -61,12 +74,12 @@ public class ElevateurSub extends Subsystem {
   
   
   public void stop(){
-    m_elevator.set(0);
+    m_elevator.set(ControlMode.Position , 0);
   }
 
   //elevator up and when it hits the top limitSwitch it stops the motor
   public void elevatorUpHatch(){
-    m_elevator.set(0.5);
+    m_elevator.set(ControlMode.PercentOutput , 0.7);
 
    // boolean LimitSwitchOpen = true;
 
@@ -92,7 +105,7 @@ public class ElevateurSub extends Subsystem {
   //}
 
   public void elevatorUpBalls(){
-    m_elevator.set(-0.5);
+    m_elevator.set(ControlMode.PercentOutput , 0.5);
   }
     /*boolean LimitSwitchOpen = true;
 
@@ -124,16 +137,14 @@ public class ElevateurSub extends Subsystem {
   }
 }
 
-    
 
 }*/
-
   //when the elevator is down and it hits the limit switch is hit, stop the motor
   public void elevatorDown(){
    // boolean LimitSwitchClosed = false;
 
    //if (LimitSwitchClosed != getLimit2()){
-    m_elevator.set(-0.5);
+    m_elevator.set(ControlMode.PercentOutput ,-0.7);
   // }else{
    //  stop();
    // }
