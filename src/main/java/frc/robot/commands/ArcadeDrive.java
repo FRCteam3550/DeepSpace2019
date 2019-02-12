@@ -36,8 +36,7 @@ public class ArcadeDrive extends Command {
     //double forward  = m_forwardtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
     //double rotation = m_rotatedtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
     //Robot.m_DriveBaseSub.arcadeDrive(forward, rotation);
-
-    Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.returnPilote().getX(),Robot.m_oi.returnPilote().getY());
+    Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
   }
 
   // Make this return true when this Command no longer needs to run execute()

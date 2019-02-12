@@ -40,7 +40,11 @@ public class RobotMap {
   public static SpeedController LeftFrontMotor;
   public static SpeedController LeftBackMotor ;
   public static SpeedController RightFrontMotor;
-  public static SpeedController RightBackMotor ;
+  public static SpeedController RightBackMotor;
+
+  //encodeur du drivetrain
+  public static Encoder Left;
+  public static Encoder Right;
 
   public static DigitalInput DriveTrainLightSensorL;
   public static DigitalInput DriveTrainLightSensorR;
@@ -72,6 +76,10 @@ public RobotMap() {
   LeftBackMotor   = new WPI_VictorSPX(1);
   RightFrontMotor = new WPI_VictorSPX(4);
   RightBackMotor  = new WPI_VictorSPX(3);
+
+  //encodeur
+  Left = new Encoder(1 , 2);
+  Right = new Encoder(3 , 4);
 
   DriveTrainLightSensorL = new DigitalInput(8);
   DriveTrainLightSensorR = new DigitalInput(9);

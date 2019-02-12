@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 
@@ -39,6 +41,11 @@ public class DriveBaseSub extends Subsystem {
   private static SpeedController m_leftBack = RobotMap.LeftBackMotor;
   private static SpeedController m_RightFront = RobotMap.RightFrontMotor;
   private static SpeedController m_RightBack = RobotMap.RightBackMotor;
+
+  //encodeur 
+  public static Encoder m_Right = RobotMap.Right;
+  public static Encoder m_Left = RobotMap.Left;
+
   //photo switch
   private static DigitalInput m_driveTrainLightSensorL = RobotMap.DriveTrainLightSensorL;
   private static DigitalInput m_driveTrainLightSensorR = RobotMap.DriveTrainLightSensorR;
