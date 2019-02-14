@@ -34,8 +34,12 @@ public class ElevateurSub extends Subsystem {
 
 
  public ElevateurSub(){
+
+  
   m_elevator.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
  // m_elevator.set(ControlMode.Position , 0);
+
+
  }
 
 
