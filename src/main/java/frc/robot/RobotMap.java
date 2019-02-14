@@ -79,27 +79,27 @@ public RobotMap() {
 
   //encodeur
   Left = new Encoder(1 , 2);
-  Right = new Encoder(3 , 4);
+  Right = new Encoder(3, 4);
 
   DriveTrainLightSensorL = new DigitalInput(8);
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
   elevatorMotor = new TalonSRX(5);
-  elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
+ // elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
     
   
   //aArm
   armMotor = new WPI_TalonSRX(6);
  
-  armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
+  //armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 
     //Wrist
   wristMotor = new WPI_TalonSRX(7);
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
 
-  LightSensorWrist = new DigitalInput(1);
+  LightSensorWrist = new DigitalInput(5);
 
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
