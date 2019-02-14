@@ -72,12 +72,46 @@ public class DriveBaseSub extends Subsystem {
 
     m_DiffDrive = new DifferentialDriveTronix(m_LeftControlGroup, m_RightControlGroup);
 
+
+    m_Left.setMaxPeriod(.1);
+    m_Left.setMinRate(.1);
+    m_Left.setDistancePerPulse(0.0223);
+    m_Left.setReverseDirection(false);
+    m_Left.setSamplesToAverage(7);
+
+    addChild( "left encoder", m_Left);
+
+    m_Right.setMaxPeriod(.1);
+    m_Right.setMinRate(.1);
+    m_Right.setDistancePerPulse(0.0223);
+    m_Right.setReverseDirection(true);
+    m_Right.setSamplesToAverage(7);
+
+    addChild( "right encoder", m_Right);
+
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
      setDefaultCommand(new ArcadeDrive());
+  }
+
+
+  public double getLeftDistance(){
+    return m_Left.getDistance();
+  }
+
+  public double getRightDistance(){
+    return m_Right.getDistance();
+  }
+
+  public void resetLeftEncoder(){
+    m_Left.reset();
+  }
+
+  public void resetRightEncoder(){
+    m_Right.reset();
   }
 
   public void stopRobot(){

@@ -153,6 +153,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_DriveBaseSub.resetLeftEncoder();
+    m_DriveBaseSub.resetRightEncoder();
+
   }
 
   /**
@@ -160,9 +163,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     Scheduler.getInstance().run();
    // SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
    // SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
+   
+  SmartDashboard.putNumber("leftEncoder", m_DriveBaseSub.getLeftDistance());
+  SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
 
   }
 

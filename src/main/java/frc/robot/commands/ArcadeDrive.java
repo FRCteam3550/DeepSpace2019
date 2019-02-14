@@ -37,9 +37,13 @@ public class ArcadeDrive extends Command {
     //double forward  = m_forwardtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
     //double rotation = m_rotatedtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
     //Robot.m_DriveBaseSub.arcadeDrive(forward, rotation);
+<<<<<<< HEAD
     Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.filterYaxis(),Robot.m_oi.filterXaxis(), 0, 0);
     SmartDashboard.putNumber("YaxisFiltered",Robot.m_oi.filterYaxis() );
     SmartDashboard.putNumber("XaxisFiltered",Robot.m_oi.filterXaxis() );
+=======
+    Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
+>>>>>>> ac557a7ed41f639e958fdb8f7ffcace74b694bc5
   }
 
   // Make this return true when this Command no longer needs to run execute()
