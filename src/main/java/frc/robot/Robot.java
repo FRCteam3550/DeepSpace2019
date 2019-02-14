@@ -161,7 +161,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
+   // SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
    // SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
 
   }

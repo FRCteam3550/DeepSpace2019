@@ -51,6 +51,22 @@ Joystick pilote;
   public Joystick returnPilote(){
     return pilote;
   }
+  
+  public double filterYaxis(){
+    return filter(returnPilote().getY());
+   }
+   
+   public double filterXaxis(){
+     return filter(returnPilote().getX());
+    }
+   public double filter(double input){
+     if (input >= .02) return input;
+     
+     if (input <= -.02) return input;
+ 
+     return 0;
+     
+   }
 
 
 

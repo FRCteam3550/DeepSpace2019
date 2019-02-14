@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.util.DifferentialDriveTronix;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -35,7 +36,7 @@ public class DriveBaseSub extends Subsystem {
   private SpeedControllerGroup m_LeftControlGroup;
   private SpeedControllerGroup m_RightControlGroup;
 
-  private DifferentialDrive m_DiffDrive;
+  private DifferentialDriveTronix m_DiffDrive;
 
   private static SpeedController m_leftFront = RobotMap.LeftFrontMotor;
   private static SpeedController m_leftBack = RobotMap.LeftBackMotor;
@@ -69,7 +70,7 @@ public class DriveBaseSub extends Subsystem {
     m_LeftControlGroup = new SpeedControllerGroup(m_leftFront, m_leftBack);
     m_RightControlGroup = new SpeedControllerGroup(m_RightFront, m_RightBack);
 
-    m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
+    m_DiffDrive = new DifferentialDriveTronix(m_LeftControlGroup, m_RightControlGroup);
 
   }
 
@@ -86,16 +87,17 @@ public class DriveBaseSub extends Subsystem {
 
 
 
-  public void arcadeDrive(double xSpeed, double zRotation) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation);
+  public void arcadeDrive(double xSpeed, double zRotation, double currentForwardSpeed, double currentTurningSpeed) {
+   // m_DiffDrive.arcadeDrive(xSpeed, zRotation);
+   m_DiffDrive.arcadeDrive(xSpeed, zRotation, currentForwardSpeed, currentTurningSpeed);
   }
 
   public void arcadeDrive(double xSpeed, double zRotation , boolean squareInputs) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, squareInputs);
+   // m_DiffDrive.arcadeDrive(xSpeed, zRotation, squareInputs);
   }
 
   public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, isQuickTurn);
+   // m_DiffDrive.arcadeDrive(xSpeed, zRotation, isQuickTurn);
 
   }
 
