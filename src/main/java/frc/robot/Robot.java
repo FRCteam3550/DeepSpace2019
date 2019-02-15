@@ -24,6 +24,8 @@ import frc.robot.subsystems.GrabberSub;
 //import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
 
+import TronixLib.RecordDataTronix;
+
 
 
 /**
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
   public static Arm m_arm;
+  public static RecordDataTronix m_RecordDataTronix;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
     m_elevateur = new ElevateurSub();
     m_arm = new Arm();
     m_DriveBaseSub = new DriveBaseSub();
+    m_RecordDataTronix = new RecordDataTronix();
    // status = ByteBuffer.allocateDirect(4).asIntBuffer();
      
     //try 

@@ -105,6 +105,10 @@ public class DriveBaseSub extends Subsystem {
     return m_Right.getDistance();
   }
 
+  public double getDistance() {
+    return (getLeftDistance() + getRightDistance()) / 2;
+  }
+
   public void resetLeftEncoder(){
     m_Left.reset();
   }
@@ -113,12 +117,19 @@ public class DriveBaseSub extends Subsystem {
     m_Right.reset();
   }
 
+  public void resetEncoders(){
+    resetLeftEncoder();
+    resetRightEncoder();
+  }
+
   public void stopRobot(){
     m_LeftControlGroup.set(0);
     m_RightControlGroup.set(0);
   }
 
-
+  public AHRS getAhrs () {
+    return ahrs;
+  }
 
   public void arcadeDrive(double xSpeed, double zRotation) {
     m_DiffDrive.arcadeDrive(xSpeed, zRotation);
@@ -130,7 +141,10 @@ public class DriveBaseSub extends Subsystem {
 
   public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
     m_DiffDrive.arcadeDrive(xSpeed, zRotation, isQuickTurn);
+  }
 
+  public void tankDrive(double LeftSpeed, double RightSpeed) {
+    m_DiffDrive.tankDrive(LeftSpeed, RightSpeed);
   }
 
   
