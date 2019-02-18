@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import TronixLib.DifferentialDriveTronix;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeDriveCmd;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -67,13 +67,12 @@ public class DriveBaseSub extends Subsystem {
     m_RightControlGroup = new SpeedControllerGroup(m_RightFrontMotor, m_RightBackMotor);
 
     m_DiffDrive = new DifferentialDriveTronix(m_LeftControlGroup, m_RightControlGroup);
-
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new ArcadeDrive());
+     setDefaultCommand(new ArcadeDriveCmd());
   }
 
   public void stopRobot(){
@@ -81,17 +80,19 @@ public class DriveBaseSub extends Subsystem {
     m_RightControlGroup.set(0);
   }
 
-
-
   public void arcadeDrive(double xSpeed, double zRotation) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, 0,  0);
+    m_DiffDrive.arcadeDrive(xSpeed, zRotation, 0,  0); // not using Friction Boost yet, neet to get those speeds from encoders
   }
 
   public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
     m_DiffDrive.arcadeDrive(xSpeed, zRotation, 0, 0);
-
+  }
+   
+  public void setForwardBoostMode(Boolean newmode) {
+    m_DiffDrive.setForwardMode(newmode);
   }
 
-  
-  
+  public void setRotationBoostMode(Boolean newmode) {
+    m_DiffDrive.setRotationMode(newmode);
+  }
 }

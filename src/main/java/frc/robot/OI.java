@@ -7,9 +7,14 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import TronixLib.TuningPilotAxis;
+
+
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.Aspirer;
 import frc.robot.commands.ElevatorDown;
@@ -19,6 +24,7 @@ import frc.robot.commands.FirstLevel;
 import frc.robot.commands.Rejeter;
 import frc.robot.commands.commandsGroup.TestCmdGroup;
 import frc.robot.commands.SecondLevel;
+import frc.robot.commands.JoystickSettings.pilotForwardTuningNoneCmd;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,32 +33,40 @@ import frc.robot.commands.SecondLevel;
 public class OI {
 
 Joystick pilote;
-//TuningPilotAxis m_pilotforwardtuning;
-//TuningPilotAxis m_pilotrotatetuning;
+TuningPilotAxis m_pilotforwardtuning;
+TuningPilotAxis m_pilotrotatetuning;
+
+Joystick copilote;
+TuningPilotAxis m_copilotelevatortuning;
+TuningPilotAxis m_copilotarmtuning;
 
   public OI(){
     pilote = new Joystick(1);
-//    m_pilotforwardtuning = new TuningPilotAxis  // Still mode 0 : no tuning
-//    m_pilotrotatetuning  = new TuningPilotAxis  // Still mode 0 : no tuning
+    m_pilotforwardtuning = new TuningPilotAxis();  // Still mode 0 : no tuning
+    m_pilotrotatetuning  = new TuningPilotAxis();  // Still mode 0 : no tuning
 
-    Button b1 = new JoystickButton(pilote , 1);
-    b1.whenPressed(new SecondLevel());
+    copilote = new Joystick(2);
 
-    Button b2 = new JoystickButton(pilote, 2);
-    b2.whenPressed(new ArmUp());
+    Button b11 = new JoystickButton(pilote , 1);
+    b11.whenPressed(new SecondLevel());
 
-    Button b3 = new JoystickButton(pilote, 3);
-    b3.whenPressed(new ElevatorUpBalls());
+    Button b12 = new JoystickButton(pilote, 2);
+    b12.whenPressed(new ArmUp());
 
-    Button b4 = new JoystickButton(pilote, 4);
-    b4.whileHeld(new Aspirer());
+    Button b13 = new JoystickButton(pilote, 3);
+    b13.whenPressed(new ElevatorUpBalls());
 
-    Button b5 = new JoystickButton(pilote, 5);
-    b5.whileHeld(new Rejeter());
+    Button b14 = new JoystickButton(pilote, 4);
+    b14.whileHeld(new Aspirer());
 
-    Button b6 = new JoystickButton(pilote, 6);
-    b6.whenPressed(new TestCmdGroup());
+    Button b15 = new JoystickButton(pilote, 5);
+    b15.whileHeld(new Rejeter());
 
+    Button b16 = new JoystickButton(pilote, 6);
+    b16.whenPressed(new TestCmdGroup());
+
+    Button b21 = new JoystickButton(copilote , 1);
+    b21.whenPressed(new pilotForwardTuningNoneCmd());
   }
 
 
@@ -60,13 +74,13 @@ Joystick pilote;
     return pilote;
   }
 
-//  public Joystick returnPiloteForwardTuning(){
-//    return m_pilotforwardtuning;
-//  }
+  public TuningPilotAxis getPilotForwardTuning(){
+      return m_pilotforwardtuning;
+  }
 
-//  public Joystick returnPiloteRotationTuning(){
-//    return m_pilotrotationtuning;
-//  }
+  public TuningPilotAxis getPilotRotationTuning(){
+      return m_pilotrotatetuning;
+  }
 
 
   //// CREATING BUTTONS
