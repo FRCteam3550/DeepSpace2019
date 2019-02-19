@@ -7,9 +7,16 @@
 
 package frc.robot;
 
+
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import TronixLib.TuningPilotAxis;
+import TronixLib.JoystickTronix;
+
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.Aspirer;
 import frc.robot.commands.ElevatorDown;
@@ -18,6 +25,8 @@ import frc.robot.commands.ElevatorUpHatch;
 import frc.robot.commands.FirstLevel;
 import frc.robot.commands.Rejeter;
 import frc.robot.commands.SecondLevel;
+//import frc.robot.util.JoystickTronix;
+//import frc.robot.util.TuningPilotAxis;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,49 +34,69 @@ import frc.robot.commands.SecondLevel;
  */
 public class OI {
 
-Joystick pilote;
+//Joystick m_pilote.getJoystick();
+
+JoystickTronix m_pilote;
+//TuningPilotAxis m_pilotforwardTuning;
+JoystickTronix dummy;
+
 
   public OI(){
-    pilote = new Joystick(1);
+   //m_pilote.getJoystick() = new Joystick(0);
+   m_pilote = new JoystickTronix(0);
 
-    Button b1 = new JoystickButton(pilote , 1);
+  // m_pilotforwardTuning = new TuningPilotAxis();
+  // m_pilotrotationTuning = new TuningPilotAxis();
+
+   
+
+    Button b1 = new JoystickButton(m_pilote.getJoystick() , 1);
     b1.whenPressed(new SecondLevel());
 
-    Button b2 = new JoystickButton(pilote, 2);
+    Button b2 = new JoystickButton(m_pilote.getJoystick(), 2);
     b2.whenPressed(new ArmUp());
 
-    Button b3 = new JoystickButton(pilote, 3);
+    Button b3 = new JoystickButton(m_pilote.getJoystick(), 3);
     b3.whenPressed(new ElevatorUpBalls());
 
-    Button b4 = new JoystickButton(pilote, 4);
+    Button b4 = new JoystickButton(m_pilote.getJoystick(), 4);
     b4.whileHeld(new Aspirer());
 
-    Button b5 = new JoystickButton(pilote, 5);
+    Button b5 = new JoystickButton(m_pilote.getJoystick(), 5);
     b5.whileHeld(new Rejeter());
-
-  }
-
-
-  public Joystick returnPilote(){
-    return pilote;
   }
   
-  public double filterYaxis(){
+  
+  
+
+ //JoystickTronix m_currentJoystick;
+
+
+
+  public JoystickTronix returnPilote(){
+    return m_pilote;
+  }
+  
+ /* public double filterFwdaxis(){
     return filter(returnPilote().getY());
    }
    
-   public double filterXaxis(){
+   public double filterSideaxis(){
      return filter(returnPilote().getX());
     }
+
+
    public double filter(double input){
-     if (input >= .02) return input;
+     if (input >= .2) return input;
      
-     if (input <= -.02) return input;
+     if (input <= -.15) return input;
+
+     SmartDashboard.putNumber(, value);
  
      return 0;
      
-   }
-
+   } 
+*/
 
 
   //// CREATING BUTTONS

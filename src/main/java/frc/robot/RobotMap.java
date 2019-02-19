@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -72,20 +73,20 @@ public class RobotMap {
 
 public RobotMap() {
     // Drive Train
-  LeftFrontMotor  = new WPI_VictorSPX(2);
-  LeftBackMotor   = new WPI_VictorSPX(1);
-  RightFrontMotor = new WPI_VictorSPX(4);
-  RightBackMotor  = new WPI_VictorSPX(3);
+  LeftFrontMotor  = new WPI_VictorSPX(2); //2 WPI_VictorSPX (tous)
+  LeftBackMotor   = new WPI_VictorSPX(1); //1
+  RightFrontMotor = new WPI_VictorSPX(4); //4
+  RightBackMotor  = new WPI_VictorSPX(3); //3 
 
   //encodeur
-  Left = new Encoder(1 , 2);
-  Right = new Encoder(3, 4);
+  Left = new Encoder(1 , 2); // (1,2)
+  Right = new Encoder(3 , 4); //(3,4)
 
-  DriveTrainLightSensorL = new DigitalInput(8);
-  DriveTrainLightSensorR = new DigitalInput(9);
+  DriveTrainLightSensorL = new DigitalInput(8); //8
+  DriveTrainLightSensorR = new DigitalInput(9);  //9
 
     //elevator
-  elevatorMotor = new TalonSRX(5);
+  elevatorMotor = new TalonSRX(10);
  // elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
     
   

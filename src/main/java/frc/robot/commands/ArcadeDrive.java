@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.util.TuningPilotAxis;
 
 //import TronixLib.TuningPilotAxis;
 
@@ -19,6 +20,7 @@ import frc.robot.Robot;
 public class ArcadeDrive extends Command {
   //TuningPilotAxis m_forwardtuning;
   //TuningPilotAxis m_rotatetuning;
+  //TuningPilotAxis TuningP;
 
   public ArcadeDrive() {
     // Use requires() here to declare subsystem dependencies
@@ -29,21 +31,27 @@ public class ArcadeDrive extends Command {
   @Override
   protected void initialize() {
     Robot.m_DriveBaseSub.stopRobot();
+   // TuningP = new TuningPilotAxis();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //double forward  = m_forwardtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
-    //double rotation = m_rotatedtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
+
+    Robot.m_tuningpilotaxis.TuningPilotAxis();
+
+    double forward  = Robot.m_tuningpilotaxis.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
+    double turning = Robot.m_tuningpilotaxis.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
+    double forwardSpeed = Robot.m_DriveBaseSub.getCurrentForwardSpeed();
+    double turningSpeed = Robot.m_DriveBaseSub.getCurrentTurningSpeed();
     //Robot.m_DriveBaseSub.arcadeDrive(forward, rotation);
-<<<<<<< HEAD
-    Robot.m_DriveBaseSub.arcadeDrive(Robot.m_oi.filterYaxis(),Robot.m_oi.filterXaxis(), 0, 0);
-    SmartDashboard.putNumber("YaxisFiltered",Robot.m_oi.filterYaxis() );
-    SmartDashboard.putNumber("XaxisFiltered",Robot.m_oi.filterXaxis() );
-=======
-    Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
->>>>>>> ac557a7ed41f639e958fdb8f7ffcace74b694bc5
+    //
+   // Robot.m_DriveBaseSub.arcadeDrive(Yaxis, Xaxis, forwardSpeed, turningSpeed); 
+   Robot.m_DriveBaseSub.arcadeDrive(-forward, turning, forwardSpeed, turningSpeed); 
+ /*   SmartDashboard.putNumber("YaxisFiltered",Robot.m_oi.filterYaxis() );
+    SmartDashboard.putNumber("XaxisFiltered",Robot.m_oi.filterXaxis() );*/
+
+    //Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
   }
 
   // Make this return true when this Command no longer needs to run execute()

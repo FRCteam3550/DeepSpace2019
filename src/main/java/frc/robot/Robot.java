@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.cameraserver.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.GrabberPrendreCmd;
@@ -23,7 +24,7 @@ import frc.robot.subsystems.GrabberSub;
 //import edu.wpi.first.wpilibj.I2C.Port;
 //import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
-
+import frc.robot.util.TuningPilotAxis;
 
 
 /**
@@ -42,6 +43,8 @@ public class Robot extends TimedRobot {
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
   public static Arm m_arm;
+  public static TuningPilotAxis m_tuningpilotaxis;
+  //public static CameraServer camera;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
     m_elevateur = new ElevateurSub();
     m_arm = new Arm();
     m_DriveBaseSub = new DriveBaseSub();
+    m_tuningpilotaxis = new TuningPilotAxis();
    // status = ByteBuffer.allocateDirect(4).asIntBuffer();
      
     //try 
@@ -71,7 +75,7 @@ public class Robot extends TimedRobot {
      //   }
     m_oi = new OI();
 
-
+     CameraServer.getInstance().startAutomaticCapture();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

@@ -10,6 +10,7 @@ package frc.robot.util;
 //import java.awt.geom.Arc2D.Double;
 import java.util.StringJoiner;
 
+
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
@@ -169,13 +170,16 @@ public class DifferentialDriveTronix extends RobotDriveBase {
 
 
   
-      boostInputs(currentForwardSpeed, currentTurningSpeed);
+      boostInputs(xSpeed, zRotation, currentForwardSpeed, currentTurningSpeed);
 
-      SmartDashboard.putBoolean("isInside", insideDrive);
-      SmartDashboard.putNumber("xSpeed", xSpeed);
-      SmartDashboard.putNumber("zRotation", zRotation);
-      SmartDashboard.putNumber("leftMotor", m_leftMotorOutput);
-      SmartDashboard.putNumber("rightMotor", m_rightMotorOutput);
+      //SmartDashboard.putBoolean("isInside", insideDrive);
+      //SmartDashboard.putNumber("xSpeed", xSpeed);
+      //SmartDashboard.putNumber("zRotation", zRotation);
+      SmartDashboard.putNumber("leftMotorOutput", m_leftMotorOutput);
+      SmartDashboard.putNumber("rightMotorOutput", m_rightMotorOutput);
+      SmartDashboard.putNumber("currentForwardSpeed", currentForwardSpeed);
+      SmartDashboard.putNumber("currentTurningSpeed", currentTurningSpeed);
+
     
       m_leftMotor.set(limit(m_leftMotorOutput) * m_maxOutput);
       m_rightMotor.set(limit(m_rightMotorOutput) * m_maxOutput * m_rightSideInvertMultiplier );
@@ -183,14 +187,15 @@ public class DifferentialDriveTronix extends RobotDriveBase {
       feed();
     }
   
-    public void boostInputs(double currentForwardSpeed, double currentTurningSpeed){
+    public void boostInputs(double xSpeed, double zRotation, double currentForwardSpeed, double currentTurningSpeed){
       //m_currentForwardSpeed = 1.0;  // Pour eliminer une erreur de compilation inutile
       //m_currentTunringSpeed = 1.0;
 
-      if ((m_leftMotorOutput == 0 && m_rightMotorOutput == 0) ||
+      if ((xSpeed == 0 && zRotation == 0) ||
         (m_forwardCompensationMode == false && m_rotationCompensationMode == false)){
           return;
       }
+      
       
 
       
@@ -206,39 +211,30 @@ public class DifferentialDriveTronix extends RobotDriveBase {
 
      //}
 
-      /* m_ some stuff
-      */
+      // m_ some stuff
+      //change some stuff to Math.copySign or Math.abs to save like half the lines
 
-      //straight boosts
+      //forward boosts
       if (currentTurningSpeed == 0 && m_leftMotorOutput == m_rightMotorOutput){
-      //highBoost 
-       if (currentForwardSpeed == 0 && m_leftMotorOutput != 0.0  && m_leftMotorOutput <= 0.5 || currentForwardSpeed == 0 && m_leftMotorOutput != 0.0  && m_leftMotorOutput >= -0.5 ){
-           if (m_leftMotorOutput > 0){
-           m_leftMotorOutput = m_leftMotorOutput + 0.3;
-           m_rightMotorOutput = m_rightMotorOutput + 0.3;
-           }
-           else if (m_leftMotorOutput < 0){
-              m_leftMotorOutput = m_leftMotorOutput - 0.3;
-              m_rightMotorOutput = m_rightMotorOutput - 0.3;
-           }
-        }
-        }
-        /*
-        //midBoost - unused (set variables)
-        else if(currentForwardSpeed == 0 && m_leftMotorOutput >= 0.0){
-           if (m_leftMotorOutput > 0){
-            m_leftMotorOutput = m_leftMotorOutput + 0.2;
-             m_rightMotorOutput = m_rightMotorOutput + 0.2;
-         } 
-           if (m_leftMotorOutput < 0){
-              m_leftMotorOutput = m_leftMotorOutput -  0.2;
-              m_rightMotorOutput = m_rightMotorOutput - 0.2;
+          //highBoost 
+          // if moving slow and wanting to move fast (direction independent)
+          if (Math.abs(currentForwardSpeed) <= 0.3  && Math.abs(m_leftMotorOutput) >= 0.5 )   {
+             m_leftMotorOutput = Math.copySign(m_leftMotorOutput + 0.3 , m_leftMotorOutput); 
+             m_rightMotorOutput = Math.copySign(m_rightMotorOutput + 0.3 , m_rightMotorOutput); 
+
+            
           }
-        }
-        */
+      }
+        
+        //midBoost - unused (set variables)
+         else if(Math.abs(currentForwardSpeed) == 0 && Math.abs(m_leftMotorOutput) >= 0.2 ){
+             m_leftMotorOutput = Math.copySign(m_leftMotorOutput + 0.2 , m_leftMotorOutput); 
+             m_rightMotorOutput = Math.copySign(m_rightMotorOutput + 0.2 , m_rightMotorOutput); 
+          }
+        
         
         // lowBoost wokrs for pos, not neg -- test
-        else if (currentForwardSpeed == 0  && m_leftMotorOutput >= 0.5 || currentForwardSpeed == 0  && m_leftMotorOutput <= -0.5 ){
+        else if (currentForwardSpeed >= 0.5  && m_leftMotorOutput >= 0.5  && currentForwardSpeed <= 0.7|| currentForwardSpeed == 0  && m_leftMotorOutput <= -0.5 ){
             if (m_leftMotorOutput > 0){
                  m_leftMotorOutput = m_leftMotorOutput + 0.1;
                  m_rightMotorOutput = m_rightMotorOutput + 0.1;
@@ -266,7 +262,7 @@ public class DifferentialDriveTronix extends RobotDriveBase {
         }
         
       }
-        // NOT YET USABLE - (wrong variables)
+        // NOT YET USABLE - (wrong variables -- DEAL WITH THIS)
         // turn boosts - no forward speed
         else if (currentForwardSpeed == 0 && leftMotorOutput != rightMotorOutput) {
             //highBoost 

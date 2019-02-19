@@ -74,7 +74,9 @@ public class ElevateurSub extends Subsystem {
   
   
   public void stop(){
-    m_elevator.set(ControlMode.Position , 0);
+   // m_elevator.set(ControlMode.Position , 0);
+   m_elevator.set(ControlMode.PercentOutput , 0);
+
   }
 
   //elevator up and when it hits the top limitSwitch it stops the motor

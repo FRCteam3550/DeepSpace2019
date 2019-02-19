@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -75,19 +76,25 @@ public class DriveBaseSub extends Subsystem {
 
     m_Left.setMaxPeriod(.1);
     m_Left.setMinRate(.1);
-    m_Left.setDistancePerPulse(0.0223);
-    m_Left.setReverseDirection(false);
+    m_Left.setDistancePerPulse(0.0223); // 0.0223
+    m_Left.setReverseDirection(false); // false
     m_Left.setSamplesToAverage(7);
 
     addChild( "left encoder", m_Left);
 
     m_Right.setMaxPeriod(.1);
     m_Right.setMinRate(.1);
-    m_Right.setDistancePerPulse(0.0223);
-    m_Right.setReverseDirection(true);
+    m_Right.setDistancePerPulse(0.0223); // 0.0223
+    m_Right.setReverseDirection(true); //true
     m_Right.setSamplesToAverage(7);
 
     addChild( "right encoder", m_Right);
+
+    SmartDashboard.putNumber("right speed", m_Right.getRate());
+    SmartDashboard.putNumber("left speed", m_Left.getRate());
+
+    
+
 
   }
 
@@ -121,9 +128,45 @@ public class DriveBaseSub extends Subsystem {
 
 
 
+  public double getCurrentForwardSpeed(){
+   double currentForwardSpeed = 0;
+
+    double maxRate = 200;
+
+     // currentForwardSpeed mapped between -1 and 1 
+    currentForwardSpeed = Math.copySign(((m_Left.getRate() + m_Right.getRate()) / 2) / maxRate, 1);
+   
+    return currentForwardSpeed;
+
+  }
+  public double getCurrentTurningSpeed(){
+    double currentTurningSpeed = 0;
+
+    double maxRate = 200;
+
+    //currentTurningSpeed mapped between -1 and 1
+    currentTurningSpeed = ( m_Left.getRate() / maxRate ) - ( m_Right.getRate() / maxRate ) / 2;
+
+    return currentTurningSpeed;
+
+  }
+
+
+
   public void arcadeDrive(double xSpeed, double zRotation, double currentForwardSpeed, double currentTurningSpeed) {
    // m_DiffDrive.arcadeDrive(xSpeed, zRotation);
+   double maxRate = 200;
+   currentForwardSpeed = ((m_Left.getRate() + m_Right.getRate()) / 2) / maxRate; 
+   currentTurningSpeed = ( m_Left.getRate() / maxRate ) - ( m_Right.getRate() / maxRate ) / 2;
+
+   
+
    m_DiffDrive.arcadeDrive(xSpeed, zRotation, currentForwardSpeed, currentTurningSpeed);
+
+  // SmartDashboard.putNumber("forward speed", currentForwardSpeed);
+  // SmartDashboard.putNumber("turn speed", currentTurningSpeed);
+
+
   }
 
   public void arcadeDrive(double xSpeed, double zRotation , boolean squareInputs) {
