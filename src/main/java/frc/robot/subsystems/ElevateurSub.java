@@ -9,19 +9,21 @@ package frc.robot.subsystems;
 import java.io.ObjectInputFilter.Config;
 
 import javax.management.loading.PrivateMLet;
+import frc.robot.PIDsettings.Gains;
+import frc.robot.PIDsettings.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.StopRobot;
+import frc.robot.commands.moveElevator;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -35,126 +37,125 @@ public class ElevateurSub extends Subsystem {
 
  public ElevateurSub(){
 
-  
-  m_elevator.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
- // m_elevator.set(ControlMode.Position , 0);
+  m_elevator.configFactoryDefault();
+  m_elevator.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs0);
+
+		/* Configure Sensor Source for Pirmary PID */
+		m_elevator.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
+											Constants.kPIDLoopId0, 
+											Constants.kTimeoutMs0);
+
+		/**
+		 * Configure Talon SRX Output and Sesnor direction accordingly
+		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
+		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
+		 */
+		m_elevator.setSensorPhase(true); //false on the tests robot and True on the Year's robot
+		m_elevator.setInverted(true);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		m_elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs0);
+		m_elevator.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs0);
+
+		/* Set the peak and nominal outputs */
+		m_elevator.configNominalOutputForward(0, Constants.kTimeoutMs0);
+		m_elevator.configNominalOutputReverse(0, Constants.kTimeoutMs0);
+		m_elevator.configPeakOutputForward(1, Constants.kTimeoutMs0);
+		m_elevator.configPeakOutputReverse(-1, Constants.kTimeoutMs0);
 
 
- }
+		/* Set Motion Magic gains in slot0 - see documentation */
+		m_elevator.selectProfileSlot(Constants.kSlotId0, Constants.kPIDLoopId0);
+		m_elevator.config_kF(Constants.kSlotId0, Constants.kGains0.kF, Constants.kTimeoutMs0);
+		m_elevator.config_kP(Constants.kSlotId0, Constants.kGains0.kP, Constants.kTimeoutMs0);
+	  m_elevator.config_kI(Constants.kSlotId0, Constants.kGains0.kI, Constants.kTimeoutMs0);
+    m_elevator.config_kD(Constants.kSlotId0, Constants.kGains0.kD, Constants.kTimeoutMs0);
 
+	  m_elevator.configMotionCruiseVelocity(Constants.kCruiseVelocity0, Constants.kTimeoutMs0);
+	  m_elevator.configMotionAcceleration(Constants.kAcceleration0, Constants.kTimeoutMs0);
+
+
+	  m_elevator.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+	}
 
  public double getSensorValue(){
    return m_elevator.getSensorCollection().getPulseWidthPosition();
  } 
 
+ public void setSensorAt0(){
+  m_elevator.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+ }
 
-  //limit switch en bas
- // boolean Value1 = m_limitSwitch1.get();
-
-  //limit switch en haut
- // boolean Value2 = m_limitSwitch2.get();
-
- /* public void DistanceHatch1(Encoder m_Encoder){
-    m_Encoder.setDistancePerPulse(0);
-  } */
-
- /* public int getPosition(){
-    return m_encodeur.get();
-  } */
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-     setDefaultCommand(new StopRobot());
+     setDefaultCommand(new moveElevator());
   }
-
- // public boolean getLimit1(){
-  //  return  m_limitSwitch1.get();
- // }
-//
- // public boolean getLimit2(){
-  //  return  m_limitSwitch2.get();
-  //}
-  
-  
   public void stop(){
     m_elevator.set(ControlMode.Position , 0);
   }
 
-  //elevator up and when it hits the top limitSwitch it stops the motor
-  public void elevatorUpHatch(){
-    m_elevator.set(ControlMode.PercentOutput , 0.7);
+  public static double initialPosition = 0;
+  public static double position2 = 1 * 4096 * 8;
 
-   // boolean LimitSwitchOpen = true;
 
-    //if (getLimit1()== LimitSwitchOpen ){
-    //  stop();
-   // }
-
-    //else if  (getPosition() == 0) {
-    //  if (getPosition() != 50){
-       // m_elevator.set(0.5);
-      //}else{
-     //   stop();
-     // }
-    }
-
-    //else if  (getPosition() == 50) {
-    //  if (getPosition() != 100){
-     //   m_elevator.set(0.5);}
-    //  else{
-    //  stop();
-   // }
-  //}
-  //}
-
-  public void elevatorUpBalls(){
-    m_elevator.set(ControlMode.PercentOutput , 0.5);
+  public void moveElevator(double percentageOutput){
+    m_elevator.set(ControlMode.PercentOutput ,percentageOutput);
   }
-    /*boolean LimitSwitchOpen = true;
+ 
+  public void configInitial(){
+		m_elevator.selectProfileSlot(Constants.kSlotId0, Constants.kPIDLoopId0);
+		m_elevator.config_kF(Constants.kSlotId0, Constants.kGains0.kF, Constants.kTimeoutMs0);
+		m_elevator.config_kP(Constants.kSlotId0, Constants.kGains0.kP, Constants.kTimeoutMs0);
+	  m_elevator.config_kI(Constants.kSlotId0, Constants.kGains0.kI, Constants.kTimeoutMs0);
+    m_elevator.config_kD(Constants.kSlotId0, Constants.kGains0.kD, Constants.kTimeoutMs0);
 
-    if (getLimit1()== LimitSwitchOpen ){
-      stop();
-    }
-
-    else if  (getPosition() == 0) {
-      if (getPosition() !=20){
-        m_elevator.set(0.5);
-      }else{
-        stop();
-      }
-    }
-
-    else if  (getPosition() == 20) {
-      if (getPosition() != 80){
-        m_elevator.set(0.5);}
-      else{
-      stop();
-    }
+	  m_elevator.configMotionCruiseVelocity(Constants.kCruiseVelocity0, Constants.kTimeoutMs0);
+    m_elevator.configMotionAcceleration(Constants.kAcceleration0, Constants.kTimeoutMs0);
   }
 
-  else if  (getPosition() == 80) {
-    if (getPosition() != 130){
-      m_elevator.set(0.5);}
-    else{
-    stop();
+  public void goInitial(double position){
+       m_elevator.set(ControlMode.MotionMagic, position);
   }
-}
-
-
-}*/
-  //when the elevator is down and it hits the limit switch is hit, stop the motor
-  public void elevatorDown(){
-   // boolean LimitSwitchClosed = false;
-
-   //if (LimitSwitchClosed != getLimit2()){
-    m_elevator.set(ControlMode.PercentOutput ,-0.7);
-  // }else{
-   //  stop();
-   // }
-
+ 
+  public void ConfigPos1(){   
+    m_elevator.selectProfileSlot(Constants.kSlotId1, Constants.kPIDLoopId1);
+    m_elevator.config_kF(Constants.kSlotId1, Constants.kGains1.kF, Constants.kTimeoutMs0);
+    m_elevator.config_kP(Constants.kSlotId1, Constants.kGains1.kP, Constants.kTimeoutMs0);
+    m_elevator.config_kI(Constants.kSlotId1, Constants.kGains1.kI, Constants.kTimeoutMs0);
+    m_elevator.config_kD(Constants.kSlotId1, Constants.kGains1.kD, Constants.kTimeoutMs0);  
   }
 
+  public void goPos1(double position1){
+    m_elevator.set(ControlMode.MotionMagic , position1);
+  }
 
+  public void ConfigPos2(){   
+    m_elevator.selectProfileSlot(Constants.kSlotId2, Constants.kPIDLoopId2);
+    m_elevator.config_kF(Constants.kSlotId2, Constants.kGains2.kF, Constants.kTimeoutMs0);
+    m_elevator.config_kP(Constants.kSlotId2, Constants.kGains2.kP, Constants.kTimeoutMs0);
+    m_elevator.config_kI(Constants.kSlotId2, Constants.kGains2.kI, Constants.kTimeoutMs0);
+    m_elevator.config_kD(Constants.kSlotId2, Constants.kGains2.kD, Constants.kTimeoutMs0);  
+  }
+  
+
+ public void goPos2(double position){
+   m_elevator.set(ControlMode.MotionMagic , position);
+ }
+ 
+
+ public void getMotorInfo(){
+    
+   SmartDashboard.putNumber("elevatorVel", m_elevator.getSelectedSensorVelocity());
+   SmartDashboard.putNumber("elevMotorOuput", m_elevator.getMotorOutputPercent());
+   SmartDashboard.putNumber("elevator position", m_elevator.getSelectedSensorPosition());
+  SmartDashboard.putBoolean("elevatorLimitSwitch", m_elevator.getSensorCollection().isRevLimitSwitchClosed());
+  
+ }
+
+ public double getSensorPosition(){
+    return m_elevator.getSelectedSensorPosition();
+ }
 
 }

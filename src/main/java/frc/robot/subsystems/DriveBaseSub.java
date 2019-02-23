@@ -129,10 +129,13 @@ public class DriveBaseSub extends Subsystem {
   }
 
   public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
-    m_DiffDrive.arcadeDrive(xSpeed, zRotation, isQuickTurn);
-
+    m_DiffDrive.curvatureDrive(xSpeed, zRotation, isQuickTurn);
   }
 
-  
+  public void tankDrive(double LeftSpeed , double RightSpeed){
+    m_DiffDrive.tankDrive(LeftSpeed, RightSpeed);
+  }
+
+
   
 }

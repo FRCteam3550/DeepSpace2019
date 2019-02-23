@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -52,16 +53,18 @@ public class RobotMap {
   public static TalonSRX elevatorMotor;
   public static Encoder elevatoEncoder;
 
-  public static SpeedController armMotor;
+  public static TalonSRX armMotor;
+
+  public static TalonSRX wedgerMotor;
  
-  public static Encoder armEncoder;
+ // public static Encoder armEncoder;
 
     //Wrist
-  public static SpeedController wristMotor;
+  public static SpeedController grabberMotor;
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
 
-  public static DigitalInput LightSensorWrist;
+  public static DigitalInput lightSensorGrabber;
 
 
  // public static DigitalInput limitSwitch1;
@@ -90,20 +93,22 @@ public RobotMap() {
     
   
   //aArm
-  armMotor = new WPI_TalonSRX(6);
+  armMotor = new TalonSRX(6);
  
   //armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 
-    //Wrist
-  wristMotor = new WPI_TalonSRX(7);
+    //grabber
+  grabberMotor = new WPI_VictorSPX(7);
  // public static DigitalInput wrsistLimit1;
  // public static DigitalInput wrsistLimit2;
 
-  LightSensorWrist = new DigitalInput(5);
+ lightSensorGrabber = new DigitalInput(5);
 
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
+  //Wedger
 
+wedgerMotor = new TalonSRX(8);
   //public static int NavX
 
   // If you are using multiple modules, make sure to define both the port

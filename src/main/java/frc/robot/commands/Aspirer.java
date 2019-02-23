@@ -20,14 +20,19 @@ public class Aspirer extends Command {
   @Override
   protected void initialize() {
    // Robot.m_grabberSub.stopArmMotor();
-    Robot.m_grabberSub.stopWristMotor();
+    Robot.m_grabberSub.stopGrabberMotor();
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_grabberSub.aspirer();
+
+    if(!Robot.m_grabberSub.getLightSensorValue()){
+      Robot.m_grabberSub.stopGrabberMotor();
+    }else{
+      Robot.m_grabberSub.aspirer();
+    }
   }
 
 
@@ -40,7 +45,7 @@ public class Aspirer extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_grabberSub.stopWristMotor();
+    Robot.m_grabberSub.stopGrabberMotor();
   }
 
   // Called when another command which requires one or more of the same

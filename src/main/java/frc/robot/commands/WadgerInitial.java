@@ -10,22 +10,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmUp extends Command {
-  public ArmUp() {
+public class WadgerInitial extends Command {
+
+  private double position;
+
+  public WadgerInitial(double position) {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_arm);
+    requires(Robot.m_wedger);
+
+    this.position = position;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.stopArm();
+    Robot.m_wedger.configPos0();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.rotateArmU();
+    Robot.m_wedger.goPos0(position);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +42,7 @@ public class ArmUp extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_arm.stopArm();
+    Robot.m_wedger.StopWedger();
   }
 
   // Called when another command which requires one or more of the same

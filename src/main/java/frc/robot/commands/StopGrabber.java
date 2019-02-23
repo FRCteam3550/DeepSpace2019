@@ -19,7 +19,7 @@ public class StopGrabber extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_grabberSub.stopWristMotor();
+    Robot.m_grabberSub.stopGrabberMotor();
   }
 
   // Called repeatedly when this Command is scheduled to run

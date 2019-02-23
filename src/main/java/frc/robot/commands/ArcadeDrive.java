@@ -33,10 +33,14 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //double forward  = m_forwardtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getX());
-    //double rotation = m_rotatedtuning.getEnhancedAxis(Robot.m_oi.returnPilote().getY());
-    //Robot.m_DriveBaseSub.arcadeDrive(forward, rotation);
+    //un joystick pour avancer et tourner
     Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
+
+
+   //un joystick pour avancer et un joystick pour tourner
+    //Robot.m_DriveBaseSub.tankDrive(-Robot.m_oi.returnPilote().getY() , -Robot.m_oi.returnCoPilote().getY() );
+
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

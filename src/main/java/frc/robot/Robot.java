@@ -12,9 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.GrabberPrendreCmd;
 import frc.robot.subsystems.Arm;
-//import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.ElevateurSub;
 import frc.robot.subsystems.GrabberSub;
@@ -23,6 +21,7 @@ import frc.robot.subsystems.GrabberSub;
 //import edu.wpi.first.wpilibj.I2C.Port;
 //import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
+import frc.robot.subsystems.WedgerSub;
 
 
 
@@ -42,6 +41,7 @@ public class Robot extends TimedRobot {
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
   public static Arm m_arm;
+  public static WedgerSub m_wedger;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_wedger = new WedgerSub();
     m_RobotMap = new RobotMap();
     m_grabberSub = new GrabberSub();
     m_elevateur = new ElevateurSub();
@@ -158,7 +159,7 @@ public class Robot extends TimedRobot {
 
   }
 
-  /**
+  /*
    * This function is called periodically during operator control.
    */
   @Override
@@ -168,9 +169,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
    // SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
    
+  m_arm.armInfo();
   SmartDashboard.putNumber("leftEncoder", m_DriveBaseSub.getLeftDistance());
   SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
+  SmartDashboard.putNumber("joysticck axe y", m_oi.CoPiloteY());  
+  SmartDashboard.putBoolean("lightsensor Grabber", m_grabberSub.getLightSensorValue());
 
+  m_elevateur.getMotorInfo();
   }
 
   /**

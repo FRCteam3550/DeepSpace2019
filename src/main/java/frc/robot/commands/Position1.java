@@ -10,24 +10,29 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Rejeter extends Command {
-  public Rejeter() {
+public class Position1 extends Command {
+
+  private double position1;
+
+  public Position1(double position1) {
     // Use requires() here to declare subsystem dependencies
-     requires(Robot.m_grabberSub);
+    requires(Robot.m_elevateur);
+    this.position1 = position1;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_grabberSub.stopGrabberMotor();
+    //Robot.m_elevateur.stop();
+     Robot.m_elevateur.ConfigPos1();
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_grabberSub.rejeter();
+    Robot.m_elevateur.goPos1(position1);
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -38,7 +43,7 @@ public class Rejeter extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_grabberSub.stopGrabberMotor();
+    Robot.m_elevateur.stop();
   }
 
   // Called when another command which requires one or more of the same

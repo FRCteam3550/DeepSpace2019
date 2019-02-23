@@ -24,27 +24,9 @@ import frc.robot.commands.StopRobot;
 public class GrabberSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  private static SpeedController m_GrabberMotor = RobotMap.grabberMotor;
 
-  //rotating arm
-  //private static SpeedController m_armMotor = RobotMap.armMotor;
- // private static DigitalInput m_armLimit1 = RobotMap.armLimit1;
- // private static DigitalInput m_armLimit2 = RobotMap.armLimit2;
-  private static Encoder m_armEncoder = RobotMap.armEncoder;
-
-  //valeur des limit switch for the arm
-  //boolean valueDown = m_armLimit1.get();
- // boolean valueUp = m_armLimit2.get(); 
-
-  //Grabbeur
-  private static SpeedController m_wristMotor = RobotMap.wristMotor;
- // private static DigitalInput m_wristLimit1 = RobotMap.wrsistLimit1;
- // private static DigitalInput m_wristLimit2 = RobotMap.wrsistLimit2;
- //  private static Encoder m_wristEncoder = RobotMap.wrsistEncoder;
- // private static DoubleSolenoid m_wristPiston = RobotMap.wristPiston; 
-
-  //photoSwitch for the Grabbeur
-  private static DigitalInput m_LightSensorWrist = RobotMap.LightSensorWrist;
-  //boolean value = m_LightSensorWrist.get();
+  private static DigitalInput m_LightSensorGrabber = RobotMap.lightSensorGrabber;
 
   
   @Override
@@ -53,63 +35,23 @@ public class GrabberSub extends Subsystem {
      setDefaultCommand(new StopGrabber());
   }
 
- /* public boolean ValueDown(){
-    return m_armLimit1.get();
-  }
 
-  public boolean ValueUp(){
-    return m_armLimit2.get();
-  } */
-
- // public void stopArmMotor(){
-   // m_armMotor.set(0);
-  //}
-
-  //faire baisser le bras
-  //public void rotateArmD(){
-   // m_armMotor.set(0.5);
-  //}
-  
-  //faire monter le bras
-  //public void rotateArmU(){
-   // m_armMotor.set(-0.5);
-  //}
-
-  public void stopWristMotor(){
-    m_wristMotor.set(0);
+  public void stopGrabberMotor(){
+    m_GrabberMotor.set(0);
   }
 
   public boolean getLightSensorValue(){
-    return m_LightSensorWrist.get();
+    return m_LightSensorGrabber.get();
   }
 
+  
   //take in a ball and stop the motor when the ball is in
   public void aspirer(){
-    m_wristMotor.set(0.5);
-
-   // boolean LightSensor = true;
-
-    //if ( getLightSensorValue() == LightSensor){
-      //m_wristMotor.set(0);
-    //}
-
+      m_GrabberMotor.set(0.5);
   }
 
   public void rejeter(){
-    m_wristMotor.set(-0.5);
+    m_GrabberMotor.set(-0.5);
     
-  }
-
-  //ouvrir le piston
-  //public void forwardPiston(){
-    //m_wristPiston.set(DoubleSolenoid.Value.kForward);
-  //}
-
-  //fermer le piston
-  //public void reversePiston(){
-    //m_wristPiston.set(DoubleSolenoid.Value.kReverse);
-  //}
-
-  
-  
+  }  
 }
