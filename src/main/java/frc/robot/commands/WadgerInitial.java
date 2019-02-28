@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class WadgerInitial extends Command {
@@ -19,6 +20,7 @@ public class WadgerInitial extends Command {
     requires(Robot.m_wedger);
 
     this.position = position;
+    setTimeout(2);
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +38,8 @@ public class WadgerInitial extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    SmartDashboard.putNumber("wedger Int_Pos", Robot.m_wedger.getPosition());
+    return isTimedOut() || Robot.m_wedger.getPosition() < 20 ;
   }
 
   // Called once after isFinished returns true

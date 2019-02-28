@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class WedgerPos2 extends Command {
@@ -19,6 +20,8 @@ public class WedgerPos2 extends Command {
     // Use requires() here to declare subsystem dependencies
      requires(Robot.m_wedger);
       this.position = position;
+      setTimeout(2);
+      
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +39,8 @@ public class WedgerPos2 extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    SmartDashboard.putNumber("wedger Position2", Robot.m_wedger.getPosition());
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true

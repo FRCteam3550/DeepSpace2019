@@ -25,8 +25,8 @@ public class moveElevator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   Robot.m_elevateur.moveElevator(Robot.m_oi.returnCoPilote().getY());
-   // Robot.m_elevateur.stop();
+  // Robot.m_elevateur.moveElevator(Robot.m_oi.getGamePad());
+    Robot.m_elevateur.stop();
   }
 
   // Make this return true when this Command no longer needs to run execute()

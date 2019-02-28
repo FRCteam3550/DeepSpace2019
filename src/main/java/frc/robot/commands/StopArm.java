@@ -13,20 +13,20 @@ import frc.robot.Robot;
 public class StopArm extends Command {
   public StopArm() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_arm);
+    //requires(Robot.m_arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.stopArm();
+   // Robot.m_arm.stopArm();
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.stopArm();
+   // Robot.m_arm.stopArm();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +38,7 @@ public class StopArm extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_arm.stopArm();
+   // Robot.m_arm.stopArm();
 
   }
 

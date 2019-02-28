@@ -27,7 +27,6 @@ public class Aspirer extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
     if(!Robot.m_grabberSub.getLightSensorValue()){
       Robot.m_grabberSub.stopGrabberMotor();
     }else{

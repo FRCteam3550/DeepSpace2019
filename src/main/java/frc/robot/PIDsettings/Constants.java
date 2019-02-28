@@ -27,6 +27,8 @@ public class Constants {
 	 * set Cruise Velocity and Acceleration
 	 */
 
+	 // ELEVATOR CONSTANTS
+	 
 	 //slot number 0 
 	public static final int kSlotId0 = 0;
 	//pid loop number 0
@@ -81,14 +83,17 @@ public class Constants {
  
 	 public static final double ELEVATORUP = 4096 * 3;
 
+	 // ELEVATOR  CONSTANTS  END
+	 
 
+	 // ARM CONSTANTS START
 
 	 //**************************************************************************************************** */
 
 	 //slot number 1 for the arm
-	 public static final int kSlotIdArm1 = 1;
+	 public static final int kSlotIdArm1 = 0;
 	 //pid loop number 2
-	 public static final int kPIDLoopIdArm1 = 1;
+	 public static final int kPIDLoopIdArm1 = 0;
 	 //same for all the slots
 	 public static final int kTimeoutMsArm1 = 30;
  
@@ -97,7 +102,8 @@ public class Constants {
 	 public static final int kAccelerationArm1 = 10000;
  
 	 //gains for slot1
-	 public static final Gains kGainsArm1 = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
+	 public static final Gains kGainsArm1 = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);  // for test on robot tests
+	 //public static final Gains kGainsArm1 = new Gains(0.5, 0.0, 0.0, 0.1, 0, 1.0);//on 2019 robot
  
 	 public static final double ArmUp = 4096 * 3;
 
@@ -106,9 +112,9 @@ public class Constants {
 	 	 //**************************************************************************************************** */
 
 	 //slot number 2 for the arm
-	 public static final int kSlotIdArm2 = 2;
+	 public static final int kSlotIdArm2 = 1;
 	 //pid loop number 2
-	 public static final int kPIDLoopIdArm2 = 2;
+	 public static final int kPIDLoopIdArm2 = 0;
 	 //same for all the slots
 	 public static final int kTimeoutMsArm2 = 30;
  
@@ -117,73 +123,96 @@ public class Constants {
 	 public static final int kAccelerationArm2 = 10000;
  
 	 //gains for slot2
-	 public static final Gains kGainsArm2 = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
- 
+	public static final Gains kGainsArm2 = new Gains(2, 0.0, 0.0, 0.2, 0, 1.0);
+	//public static final Gains kGainsArm2 = new Gains(0.5, 0.0, 0.0, 0.1, 0, 1.0);  //on 2019 robot
 	 public static final double ArmDown = 500;
 
+   // ARM CONSTANTS END
 
-	 	 	 //**************************************************************************************************** */
+   //WEDGER CONSTANTS START
+
+ //**************************************************************************************************** */
 
 	 //slot number 1 for the wedger
-	 public static final int kSlotIdWedger1 = 1;
+	 public static final int kSlotIdWedger1 = 0;
 	 //pid loop number 1
-	 public static final int kPIDLoopIdWedger1  = 1;
+	 public static final int kPIDLoopIdWedger1  = 0;
 	 //same for all the slots
-	 public static final int kTimeoutMsWedger1  = 30;
+	 public static final int kTimeoutMsWedger1  = 10;
  
 	 //acceleration and velocity for slot 1
 	 public static final int kCruiseVelocityWedger1  = 25000;
-	 public static final int kAccelerationVWedger1  = 10000;
+	 public static final int kAccelerationVWedger1  = 25000;
  
 	 //gains for slot1
-	 public static final Gains kGainsWedger1  = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
+	 public static final Gains kGainsWedger1  = new Gains(2, 0.0, 0.0, 0.2, 0, 1.0);
  
-	 public static final double Wedger1  = 0;
+	 public static final double Wedger1  = 500;
 
 
 //**************************************************************************************************** */
 
 	 //slot number 2 for the wedger
-	 public static final int kSlotIdWedger2 = 2;
+	 public static final int kSlotIdWedger2 = 1;
 	 //pid loop number 2
-	 public static final int kPIDLoopIdWedger2  = 2;
+	 public static final int kPIDLoopIdWedger2  = 0;
 	 //same for all the slots
-	 public static final int kTimeoutMsWedger2  = 30;
+	 public static final int kTimeoutMsWedger2  = 10;
  
 	 //acceleration and velocity for slot 2
 	 public static final int kCruiseVelocityWedger2  = 25000;
 	 public static final int kAccelerationVWedger2  = 10000;
  
 	 //gains for slot2
-	 public static final Gains kGainsWedger2  = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
+	 public static final Gains kGainsWedger2  = new Gains(1, 0.0, 0.0, 0.2, 0, 1.0);
  
-	 public static final double Wedger2  = 0;
+	 public static final double Wedger2  = 1100;
 
 	 
 	 
 //**************************************************************************************************** */
 
 	 //slot number 0 for the wedger
-	 public static final int kSlotIdWedger0 = 0;
+	 public static final int kSlotIdWedger0 = 2;
 	 //pid loop number 0
 	 public static final int kPIDLoopIdWedger0  = 0;
 	 //same for all the slots
-	 public static final int kTimeoutMsWedger0  = 30;
+	 public static final int kTimeoutMsWedger0  = 10;
  
 	 //acceleration and velocity for slot 0
 	 public static final int kCruiseVelocityWedger0  = 25000;
-	 public static final int kAccelerationVWedger0  = 10000;
+	 public static final int kAccelerationVWedger0  = 25000;
  
 	 //gains for slot0
-	 public static final Gains kGainsWedger0  = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
+	 public static final Gains kGainsWedger0  = new Gains(0.2, 0.0, 0.0, 2, 0, 1.0);
  
-	 public static final double Wedger0  = 0;
+	 public static final double Wedger0  = -400; //
 
 
-	 
+
+	 //**************************************************************************************************** */
+//armSub Costants
+
+	 //slot number 0 for the wedger
+	 public static final int kSlotIdArmSub0 = 0;
+	 //pid loop number 0
+	 public static final int kPIDLoopIdArmSub0 = 0;
+	 //same for all the slots
+	 public static final int kTimeoutMsArmSub0  = 30;
+ 
+	 //acceleration and velocity for slot 0
+	 public static final int kCruiseVelocitArmSub0= 25000;
+	 public static final int kAccelerationArmSub0  = 10000;
+ 
+	 //gains for slot0
+	 public static final Gains kGainsArmSub0 = new Gains(1, 0.0, 0.0, .2, 0, 1.0);
+ 
+	 public static final double ArmSub0= -400; 
 	/**
 	 * Gains used in Motion Magic, to be adjusted accordingly
      * Gains(kp, ki, kd, kf, izone, peak output);
      */
+
+	 //WEDGER CONSTANTS END
 }
 

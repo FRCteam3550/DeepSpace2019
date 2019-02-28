@@ -10,16 +10,22 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ArmBottomCom;
+import frc.robot.commands.ArmMiddleCom;
 import frc.robot.commands.Aspirer;
+import frc.robot.commands.BrasPos3;
 import frc.robot.commands.Rejeter;
+import frc.robot.commands.WadgerInitial;
 import frc.robot.commands.WedgerPos1;
 import frc.robot.commands.WedgerPos2;
 import frc.robot.commands.Initial;
-import frc.robot.commands.MoveArmD;
-import frc.robot.commands.MoveArmU;
 import frc.robot.commands.Position1;
 import frc.robot.commands.Position2;
+import frc.robot.commands.ReadyComm;
 import frc.robot.PIDsettings.*;
+
+import frc.robot.commands.MoveNarmUP;
 import frc.robot.commands.WedgerPos1;
 import frc.robot.commands.WedgerPos2;
 
@@ -41,38 +47,57 @@ Joystick gamePad;
     coPilote = new Joystick(0);
     gamePad = new Joystick(2);
 
-
-    
-
     //elevator
-    Button b1 = new JoystickButton(gamePad , 1);
+    Button b1 = new JoystickButton(coPilote , 1);
     b1.whenPressed(new Initial(Constants.ELEVATORBOTTOM));
 
-    Button b2 = new JoystickButton(gamePad, 2);
+    Button b2 = new JoystickButton(coPilote, 2);
     b2.whenPressed(new Position1(Constants.ELEVATORMIDDLE));
 
-    Button b3 = new JoystickButton(gamePad, 3);
+    Button b3 = new JoystickButton(coPilote, 3);
     b3.whenPressed(new Position2(Constants.ELEVATORUP));
 
     // arm 
-    //Button b4 = new JoystickButton(co Pilote, 4);
-    //b4.whenPressed(new MoveArmU(Constants.ArmUp));
+    //Button b4 = new JoystickButton(coPilote, 4);
+   // b4.whenPressed(new MoveArmDown(Constants.ArmDown));
 
-    //Button b5 = new JoystickButton(coPilote, 5);
-    //b5.whenPressed(new MoveArmD(Constants.ArmDown));
+   // Button b5 = new JoystickButton(coPilote, 5);
+    //b5.whenPressed(new MoveArmUp(Constants.ArmUp));
+
+
 
     //grabber
-    Button b6 = new JoystickButton(gamePad, 6);
+    Button b6 = new JoystickButton(coPilote, 6);
     b6.whileHeld(new Aspirer());
 
-    Button b7 = new JoystickButton(gamePad, 7);
+    Button b7 = new JoystickButton(coPilote, 7);
     b7.whileHeld(new Rejeter());
 
-    Button b8 = new JoystickButton(gamePad, 8);
-    b8.whenPressed(new WedgerPos1(Constants.Wedger1));
+    //wedger
+    Button b8 = new JoystickButton(coPilote, 8);
+    b8.whenPressed(new WadgerInitial(Constants.Wedger0));
+
+    Button b9 = new JoystickButton(coPilote, 9);
+    b9.whenPressed(new WedgerPos1(Constants.Wedger1));
+
+    Button b10 = new JoystickButton(coPilote, 10);
+    b10.whenPressed(new WedgerPos2(Constants.Wedger2));
     
-    Button b9 = new JoystickButton(gamePad, 9);
-    b9.whenPressed(new WedgerPos2(Constants.Wedger2));
+    //New arm sub
+    Button b11 = new JoystickButton(coPilote, 11);
+    b11.whenPressed(new BrasPos3(Constants.ArmUp));
+
+    Button bn = new JoystickButton(gamePad, 1);
+    bn.whenPressed(new MoveNarmUP());
+
+    Button br = new JoystickButton(gamePad, 2);
+    br.whenPressed(new ArmMiddleCom());
+
+    Button bz = new JoystickButton(gamePad,3);
+    bz.whenPressed(new ArmBottomCom());
+    
+    Button bx = new JoystickButton(gamePad, 4);
+    bx.whenPressed(new ReadyComm());
 
   }
 
@@ -90,6 +115,14 @@ Joystick gamePad;
 
   public double getGamePad(){
     return gamePad.getRawAxis(1);
+  }
+
+  public double getGamePadY(){
+    return gamePad.getRawAxis(2);
+  }
+
+  public void getJoyInfo(){
+    SmartDashboard.putNumber("JoyValue", coPilote.getY());
   }
 
   //// CREATING BUTTONS

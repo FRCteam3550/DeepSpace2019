@@ -13,20 +13,20 @@ import frc.robot.Robot;
 public class MoveArm extends Command {
   public MoveArm() {
     // Use requires() here to declare subsystem dependencies
-     requires(Robot.m_arm);
+    // requires(Robot.m_arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.configManuel();
+    //Robot.m_arm.configManuel();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    Robot.m_arm.moveArmManual(Robot.m_oi.getGamePad());
+   // Robot.m_arm.stopArm();
+    //Robot.m_arm.moveArmManual(Robot.m_oi.CoPiloteY());
   }
 
   // Make this return true when this Command no longer needs to run execute()

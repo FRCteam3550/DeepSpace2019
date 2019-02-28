@@ -11,12 +11,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.PIDsettings.Constants;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.StopWedger;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import frc.robot.commands.StopWedger;
+import frc.robot.commands.WedgerManual;
 
 /**
  * Add your docs here.
@@ -26,7 +30,7 @@ public class WedgerSub extends Subsystem {
   // here. Call these from Commands.
   private static TalonSRX m_wedgerMotor = RobotMap.wedgerMotor;
 
-  public void initDefaultCommand() {
+  public WedgerSub(){ 
     m_wedgerMotor.configFactoryDefault();
     m_wedgerMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs0);
   
@@ -35,13 +39,14 @@ public class WedgerSub extends Subsystem {
                         Constants.kPIDLoopId0, 
                         Constants.kTimeoutMs0);
   
+                        m_wedgerMotor.setNeutralMode(NeutralMode.Brake);    
       /**
        * Configure Talon SRX Output and Sesnor direction accordingly
        * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
        * Phase sensor to have positive increment when driving Talon Forward (Green LED)
        */
-      m_wedgerMotor.setSensorPhase(true); //false on the tests robot and True on the Year's robot
-      m_wedgerMotor.setInverted(true);
+      m_wedgerMotor.setSensorPhase(false); //false on the tests robot and True on the Year's robot
+      m_wedgerMotor.setInverted(false);
   
       /* Set relevant frame periods to be at least as fast as periodic rate */
       m_wedgerMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs0);
@@ -64,17 +69,32 @@ public class WedgerSub extends Subsystem {
       m_wedgerMotor.configMotionCruiseVelocity(Constants.kCruiseVelocity0, Constants.kTimeoutMs0);
       m_wedgerMotor.configMotionAcceleration(Constants.kAcceleration0, Constants.kTimeoutMs0);
   
-  
+      //Zeroes the Sensor
       m_wedgerMotor.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+  }
+  public void initDefaultCommand() {
+      setDefaultCommand(new WedgerManual());
+  }
 
+  public void resetWedger(){
+   //Zeroes the Sensor
+   m_wedgerMotor.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0); 
   }
 
   public void StopWedger(){
     m_wedgerMotor.set(ControlMode.PercentOutput, 0);
   }
 
+  public void moveWedgerManual(double axey){
+    m_wedgerMotor.set(ControlMode.PercentOutput, axey);
+  }
+
   public double getEncoder(){
     return m_wedgerMotor.getSelectedSensorPosition();
+  }
+
+  public double getPosition(){
+    return getEncoder();
   }
 
   public void configPos1(){
@@ -102,15 +122,23 @@ public class WedgerSub extends Subsystem {
   }
 
   public void configPos0(){
-    m_wedgerMotor.selectProfileSlot(Constants.kSlotIdWedger0, Constants.kPIDLoopIdWedger0);
-    m_wedgerMotor.config_kF(Constants.kSlotIdWedger0, Constants.kGainsWedger0.kF, Constants.kTimeoutMs0);
-    m_wedgerMotor.config_kP(Constants.kSlotIdWedger0, Constants.kGainsWedger0.kP, Constants.kTimeoutMs0);
-    m_wedgerMotor.config_kI(Constants.kSlotIdWedger0, Constants.kGainsWedger0.kI, Constants.kTimeoutMs0);
-    m_wedgerMotor.config_kD(Constants.kSlotIdWedger0, Constants.kGainsWedger0.kD, Constants.kTimeoutMs0);
+		m_wedgerMotor.selectProfileSlot(Constants.kSlotId0, Constants.kPIDLoopId0);
+		m_wedgerMotor.config_kF(Constants.kSlotId0, Constants.kGains0.kF, Constants.kTimeoutMs0);
+		m_wedgerMotor.config_kP(Constants.kSlotId0, Constants.kGains0.kP, Constants.kTimeoutMs0);
+	  m_wedgerMotor.config_kI(Constants.kSlotId0, Constants.kGains0.kI, Constants.kTimeoutMs0);
+    m_wedgerMotor.config_kD(Constants.kSlotId0, Constants.kGains0.kD, Constants.kTimeoutMs0);
+
+	  m_wedgerMotor.configMotionCruiseVelocity(Constants.kCruiseVelocity0, Constants.kTimeoutMs0);
+    m_wedgerMotor.configMotionAcceleration(Constants.kAcceleration0, Constants.kTimeoutMs0);
   }
 
   public void goPos0(double position){
     m_wedgerMotor.set(ControlMode.MotionMagic, position);    
+  }
+
+  public void getWedgerInfo(){
+    SmartDashboard.putNumber("wedger Pos", m_wedgerMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("wedger vel" , m_wedgerMotor.getSelectedSensorVelocity());
   }
 
 }
