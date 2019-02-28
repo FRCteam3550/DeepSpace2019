@@ -94,7 +94,7 @@ public RobotMap() {
   
   //aArm
   //armMotor = new TalonSRX(9);  // 5 on 2019 robot
-  narmMotor = new TalonSRX(9);
+  narmMotor = new TalonSRX(6);
  
   //armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 

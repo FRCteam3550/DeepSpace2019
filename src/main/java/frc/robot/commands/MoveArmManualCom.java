@@ -25,7 +25,7 @@ public class MoveArmManualCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_armSub.setManualControl(Robot.m_oi.getGamePadY());
+    Robot.m_armSub.setManualControl(Robot.m_oi.getGamePad());
   }
 
   // Make this return true when this Command no longer needs to run execute()
