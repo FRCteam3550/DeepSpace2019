@@ -77,8 +77,8 @@ public RobotMap() {
     // Drive Train
   LeftFrontMotor  = new WPI_VictorSPX(2);
   LeftBackMotor   = new WPI_VictorSPX(1);
-  RightFrontMotor = new WPI_VictorSPX(5);
-  RightBackMotor  = new WPI_VictorSPX(6); //4 on 2019 robot
+  RightFrontMotor = new WPI_VictorSPX(4);
+  RightBackMotor  = new WPI_VictorSPX(3); //4 on 2019 robot
 
   //encodeur
   Left = new Encoder(1 , 2);
@@ -88,13 +88,13 @@ public RobotMap() {
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
-  elevatorMotor = new TalonSRX(8);  //4 on 2019 robot 
+  elevatorMotor = new TalonSRX(5);  //4 on 2019 robot 
  // elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
     
   
   //aArm
   //armMotor = new TalonSRX(9);  // 5 on 2019 robot
-  narmMotor = new TalonSRX(3);
+  narmMotor = new TalonSRX(9);
  
   //armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
 
@@ -108,7 +108,7 @@ public RobotMap() {
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
   //Wedger
-wedgerMotor = new TalonSRX(4);  //8 o n 2019 robot
+wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
 
   //public static int NavX
 

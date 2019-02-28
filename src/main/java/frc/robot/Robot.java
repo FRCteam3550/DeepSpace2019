@@ -10,8 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.cameraserver.*;
 //import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.DriveBaseSub;
@@ -64,6 +65,11 @@ public class Robot extends TimedRobot {
     m_DriveBaseSub = new DriveBaseSub();
     m_wedger = new WedgerSub();
     m_armSub = new ArmSub();
+    CameraServer.getInstance().startAutomaticCapture();
+
+    //Putting subsystem data in SmartDashboard
+  //  SmartDashboardSubData();
+
    // status = ByteBuffer.allocateDirect(4).asIntBuffer();
      
     //try 
@@ -180,9 +186,12 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("leftEncoder", m_DriveBaseSub.getLeftDistance());
   SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
   SmartDashboard.putNumber("joysticck axe y", m_oi.CoPiloteY());  
-  SmartDashboard.putBoolean("lightsensor Grabber", m_grabberSub.getLightSensorValue());
+  SmartDashboard.putBoolean("lightsensor Grabber2", RobotMap.lightSensorGrabber.get());
   SmartDashboard.putNumber("WedgerActualPosition", m_wedger.getPosition());
- // SmartDashboard.putData(m_arm);
+  //Uncomment this if it doesn't update, or remove it if it does
+  //SmartDashboardSubData();
+ 
+ SmartDashboard.putData(m_armSub);
   m_elevateur.getMotorInfo();
   m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
@@ -198,5 +207,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public void SmartDashboardSubData () {
+    //Placing the Subsytem data into SmartDashboard
+    SmartDashboard.putData(m_armSub);
+    SmartDashboard.putData(m_grabberSub);
+    SmartDashboard.putData(m_elevateur);
+    SmartDashboard.putData(m_DriveBaseSub);
+    SmartDashboard.putData(m_wedger);
   }
 }

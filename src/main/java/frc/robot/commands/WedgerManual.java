@@ -27,7 +27,7 @@ public class WedgerManual extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   // Robot.m_wedger.moveWedgerManual(Robot.m_oi.CoPiloteY());
+    //Robot.m_wedger.moveWedgerManual(Robot.m_oi.getGamePad());
    // Robot.m_wedger.getWedgerInfo();
   }
 

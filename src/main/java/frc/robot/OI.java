@@ -48,13 +48,13 @@ Joystick gamePad;
     gamePad = new Joystick(2);
 
     //elevator
-    Button b1 = new JoystickButton(coPilote , 1);
+    Button b1 = new JoystickButton(gamePad , 1);
     b1.whenPressed(new Initial(Constants.ELEVATORBOTTOM));
 
-    Button b2 = new JoystickButton(coPilote, 2);
+    Button b2 = new JoystickButton(gamePad, 2);
     b2.whenPressed(new Position1(Constants.ELEVATORMIDDLE));
 
-    Button b3 = new JoystickButton(coPilote, 3);
+    Button b3 = new JoystickButton(gamePad, 3);
     b3.whenPressed(new Position2(Constants.ELEVATORUP));
 
     // arm 
@@ -63,41 +63,41 @@ Joystick gamePad;
 
    // Button b5 = new JoystickButton(coPilote, 5);
     //b5.whenPressed(new MoveArmUp(Constants.ArmUp));
+    Button bn = new JoystickButton(gamePad, 6);
+    bn.whenPressed(new MoveNarmUP());
 
+    Button br = new JoystickButton(gamePad, 5);
+    br.whenPressed(new ArmMiddleCom());
+
+    Button bz = new JoystickButton(gamePad,4);
+    bz.whenPressed(new ArmBottomCom());
+    
 
 
     //grabber
-    Button b6 = new JoystickButton(coPilote, 6);
+    Button b6 = new JoystickButton(gamePad, 8);
     b6.whileHeld(new Aspirer());
 
-    Button b7 = new JoystickButton(coPilote, 7);
+    Button b7 = new JoystickButton(gamePad, 7);
     b7.whileHeld(new Rejeter());
 
     //wedger
-    Button b8 = new JoystickButton(coPilote, 8);
+    Button b8 = new JoystickButton(gamePad, 9);
     b8.whenPressed(new WadgerInitial(Constants.Wedger0));
 
-    Button b9 = new JoystickButton(coPilote, 9);
+    Button b9 = new JoystickButton(gamePad, 10);
     b9.whenPressed(new WedgerPos1(Constants.Wedger1));
 
-    Button b10 = new JoystickButton(coPilote, 10);
+    Button b10 = new JoystickButton(gamePad, 11);
     b10.whenPressed(new WedgerPos2(Constants.Wedger2));
     
     //New arm sub
-    Button b11 = new JoystickButton(coPilote, 11);
-    b11.whenPressed(new BrasPos3(Constants.ArmUp));
+    //Button b11 = new JoystickButton(gamePad, 11);
+   // b11.whenPressed(new BrasPos3(Constants.ArmUp));
 
-    Button bn = new JoystickButton(gamePad, 1);
-    bn.whenPressed(new MoveNarmUP());
 
-    Button br = new JoystickButton(gamePad, 2);
-    br.whenPressed(new ArmMiddleCom());
-
-    Button bz = new JoystickButton(gamePad,3);
-    bz.whenPressed(new ArmBottomCom());
-    
-    Button bx = new JoystickButton(gamePad, 4);
-    bx.whenPressed(new ReadyComm());
+   // Button bx = new JoystickButton(gamePad, 4);
+    //bx.whenPressed(new ReadyComm());
 
   }
 
@@ -114,11 +114,11 @@ Joystick gamePad;
   }
 
   public double getGamePad(){
-    return gamePad.getRawAxis(1);
+    return gamePad.getX();
   }
 
   public double getGamePadY(){
-    return gamePad.getRawAxis(2);
+    return gamePad.getY();
   }
 
   public void getJoyInfo(){
