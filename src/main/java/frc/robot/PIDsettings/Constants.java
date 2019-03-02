@@ -63,7 +63,7 @@ public class Constants {
 	//gains for slot1
 	public static final Gains kGains1 = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
 
-	public static final double ELEVATORMIDDLE = 4096 * 1.5;
+	public static final double ELEVATORMIDDLE = 4096 * 2;
 
 //**************************************************************************************************** */
 
@@ -81,7 +81,7 @@ public class Constants {
 	 //gains for slot2
 	 public static final Gains kGains2 = new Gains(2, 0.0, 0.0, 0.1, 0, 1.0);
  
-	 public static final double ELEVATORUP = 4096 * 3;
+	 public static final double ELEVATORUP = 4096 * 3.5;
 
 	 // ELEVATOR  CONSTANTS  END
 	 

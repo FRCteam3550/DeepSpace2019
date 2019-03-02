@@ -10,22 +10,32 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveArmManualCom extends Command {
-  public MoveArmManualCom() {
+public class ResetWedger extends Command {
+
+private double counter = 0;
+
+  public ResetWedger() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_armSub);
+    // eg. requires(chassis);
+//    requires(Robot.m_wedger);
   }
 
   // Called just before this Command runs the first time
-  @Override
+ /* @Override
   protected void initialize() {
+    Robot.m_wedger.StopWedger();
   }
-
+*/
   // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-    Robot.m_armSub.setManualControl(Robot.m_oi.getGamePadY());
-  }
+//  @Override
+ /* protected void execute() {
+      Robot.m_wedger.ResetWedger(-0.23);
+      counter++;
+    
+
+    if(counter >= 200){
+      Robot.m_wedger.StopWedger();
+    }*/
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -36,11 +46,13 @@ public class MoveArmManualCom extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+  //  Robot.m_wedger.StopWedger();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; 
@@ -18,13 +19,14 @@ import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.ElevateurSub;
 import frc.robot.subsystems.GrabberSub;
+import frc.robot.subsystems.ShooterSub;
 //import frc.robot.subsystems.LidarSub;
 //import edu.wpi.first.wpilibj.I2C;
 //import edu.wpi.first.wpilibj.I2C.Port;
 //import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
-import frc.robot.subsystems.WedgerSub;
-
+//import frc.robot.subsystems.WedgerSub;
+import edu.wpi.first.wpilibj.DriverStation;
 
 
 /**
@@ -44,8 +46,11 @@ public class Robot extends TimedRobot {
   public static GrabberSub m_grabberSub;
   //public static Arm m_arm;
   public static ArmSub m_armSub;
-  public static WedgerSub m_wedger;
+ //public static WedgerSub m_wedger;
+ public static ShooterSub shooter;
 
+  public static DriverStation m_driverStation;
+  public static String alliance;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -63,10 +68,44 @@ public class Robot extends TimedRobot {
     //m_arm = new Arm();
    // m_armSub = new ArmSub();
     m_DriveBaseSub = new DriveBaseSub();
-    m_wedger = new WedgerSub();
+  //  m_wedger = new WedgerSub();
     m_armSub = new ArmSub();
+    shooter = new ShooterSub();
+  
+
+    m_driverStation = DriverStation.getInstance();
+    DriverStation.Alliance color = m_driverStation.getAlliance();
+    alliance = "invalid";
+    
+    //for test 
+    //color = DriverStation.Alliance.Red;
+    //color = DriverStation.Alliance.Blue;
+
+    if (color == Alliance.Invalid) {
+      RobotMap.ledController.setSpeed(0.02);
+      //pulsating heartbeat pattern (possibly)
+      alliance = "none";
+    }
+    if (color == Alliance.Blue) {
+      RobotMap.ledController.setSpeed(0.87);
+      //static blue color
+      alliance = "blue";
+    } 
+    else if (color == Alliance.Red) {
+      RobotMap.ledController.setSpeed(0.61);
+      //static red color
+      alliance = "red";
+    }
+
+   // else {
+   //   RobotMap.ledController.setSpeed(0.02);
+   // }
+
+   SmartDashboard.putString("AllianceID", alliance);
+
     CameraServer.getInstance().startAutomaticCapture();
 
+   
     //Putting subsystem data in SmartDashboard
   //  SmartDashboardSubData();
 
@@ -167,7 +206,7 @@ public class Robot extends TimedRobot {
     }
     m_DriveBaseSub.resetLeftEncoder();
     m_DriveBaseSub.resetRightEncoder();
-    m_wedger.resetWedger();
+  //  m_wedger.resetWedger();
     m_armSub.resetArmPosition();
 
   }
@@ -187,20 +226,20 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
   SmartDashboard.putNumber("joysticck axe y", m_oi.CoPiloteY());  
   SmartDashboard.putBoolean("lightsensor Grabber2", RobotMap.lightSensorGrabber.get());
-  SmartDashboard.putNumber("WedgerActualPosition", m_wedger.getPosition());
+ // SmartDashboard.putNumber("WedgerActualPosition", m_wedger.getPosition());
   //Uncomment this if it doesn't update, or remove it if it does
   //SmartDashboardSubData();
  
  SmartDashboard.putData(m_armSub);
   m_elevateur.getMotorInfo();
-  m_wedger.getWedgerInfo();
+ // m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
 
 
-  if(m_wedger.getPosition() <= 0 ){
-    m_wedger.resetWedger();
+ // if(m_wedger.getPosition() <= 0 ){
+   // m_wedger.resetWedger();
   }
-  }
+  
 
   /**
    * This function is called periodically during test mode.
@@ -215,6 +254,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_grabberSub);
     SmartDashboard.putData(m_elevateur);
     SmartDashboard.putData(m_DriveBaseSub);
-    SmartDashboard.putData(m_wedger);
+  //  SmartDashboard.putData(m_wedger);
   }
 }

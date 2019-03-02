@@ -15,6 +15,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
@@ -43,6 +45,9 @@ public class RobotMap {
   public static SpeedController RightFrontMotor;
   public static SpeedController RightBackMotor;
 
+  public static SpeedController RightShooter;
+  public static SpeedController LeftShooter;
+
   //encodeur du drivetrain
   public static Encoder Left;
   public static Encoder Right;
@@ -55,7 +60,7 @@ public class RobotMap {
 
   //public static TalonSRX armMotor;
   public static TalonSRX narmMotor;
-  public static TalonSRX wedgerMotor;
+  //public static TalonSRX wedgerMotor;
  
  // public static Encoder armEncoder;
 
@@ -71,14 +76,23 @@ public class RobotMap {
   //public static DigitalInput limitSwitch2;
 
  // public static DigitalInput armLimit1;
-  //public static DigitalInput armLimit2;
+  //public static DigitalInput armLimit2;<
+
+  public static PWM ledController;
 
 public RobotMap() {
+
+  ledController = new PWM(0);
+
     // Drive Train
   LeftFrontMotor  = new WPI_VictorSPX(2);
   LeftBackMotor   = new WPI_VictorSPX(1);
   RightFrontMotor = new WPI_VictorSPX(4);
   RightBackMotor  = new WPI_VictorSPX(3); //4 on 2019 robot
+
+  RightShooter = new Spark(10);
+  LeftShooter = new Spark(11);
+
 
   //encodeur
   Left = new Encoder(1 , 2);
@@ -108,7 +122,7 @@ public RobotMap() {
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
   //Wedger
-wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
+//.wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
 
   //public static int NavX
 

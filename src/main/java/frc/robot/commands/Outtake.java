@@ -10,10 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class MoveArmManualCom extends Command {
-  public MoveArmManualCom() {
+public class Outtake extends Command {
+  public Outtake() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_armSub);
+    // eg. requires(chassis);]
+    requires(Robot.shooter);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +25,7 @@ public class MoveArmManualCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_armSub.setManualControl(Robot.m_oi.getGamePadY());
+    Robot.shooter.outtake();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,11 +37,13 @@ public class MoveArmManualCom extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.shooter.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

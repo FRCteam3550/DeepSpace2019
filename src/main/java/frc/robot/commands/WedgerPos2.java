@@ -18,35 +18,35 @@ public class WedgerPos2 extends Command {
   public WedgerPos2(double position) {
 
     // Use requires() here to declare subsystem dependencies
-     requires(Robot.m_wedger);
-      this.position = position;
-      setTimeout(2);
+   // requires(Robot.m_wedger);
+    //  this.position = position;
+    //  setTimeout(2);
       
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_wedger.configPos2();
+   // Robot.m_wedger.configPos2();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_wedger.goPos2(position);
+   // Robot.m_wedger.goPos2(position);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    SmartDashboard.putNumber("wedger Position2", Robot.m_wedger.getPosition());
-    return isTimedOut();
+   // SmartDashboard.putNumber("wedger Position2", Robot.m_wedger.getPosition());
+    return false; //isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_wedger.StopWedger();
+ //   Robot.m_wedger.StopWedger();
   }
 
   // Called when another command which requires one or more of the same

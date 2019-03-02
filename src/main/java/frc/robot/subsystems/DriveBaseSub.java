@@ -71,12 +71,15 @@ public class DriveBaseSub extends Subsystem {
 
     m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
 
+    m_DiffDrive.setMaxOutput(0.90);
+
 
     m_Left.setMaxPeriod(.1);
     m_Left.setMinRate(.1);
     m_Left.setDistancePerPulse(0.0223);
     m_Left.setReverseDirection(false);
     m_Left.setSamplesToAverage(7);
+    
 
     addChild( "left encoder", m_Left);
 

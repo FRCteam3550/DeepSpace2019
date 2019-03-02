@@ -35,9 +35,13 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     //un joystick pour avancer et tourner
    // Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
-
+ 
 
    //un joystick pour avancer et un joystick pour tourner
+
+   
+
+
   Robot.m_DriveBaseSub.tankDrive(-Robot.m_oi.returnPilote().getY() , -Robot.m_oi.returnCoPilote().getY() );
 
 

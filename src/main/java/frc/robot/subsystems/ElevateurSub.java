@@ -154,6 +154,10 @@ public class ElevateurSub extends Subsystem {
   
  }
 
+ public void goPosition3(double position){
+   m_elevator.set(ControlMode.MotionMagic, position);
+ }
+
  public double getSensorPosition(){
     return m_elevator.getSelectedSensorPosition();
  }

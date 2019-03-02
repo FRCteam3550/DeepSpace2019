@@ -59,6 +59,7 @@ public class ArmSub extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new MoveArmManualCom());
+    
   }
   public void resetArmPosition(){
     m_armMotor.setSelectedSensorPosition(0, Constants.kPIDLoopIdArmSub0, Constants.kTimeoutMsArmSub0); 
