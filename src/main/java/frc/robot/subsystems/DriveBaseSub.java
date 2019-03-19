@@ -72,6 +72,8 @@ public class DriveBaseSub extends Subsystem {
     m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
 
     m_DiffDrive.setMaxOutput(0.90);
+    //m_DiffDrive.setMaxOutput(0.85);
+
 
 
     m_Left.setMaxPeriod(.1);

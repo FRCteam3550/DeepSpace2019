@@ -85,13 +85,13 @@ public RobotMap() {
   ledController = new PWM(0);
 
     // Drive Train
-  LeftFrontMotor  = new WPI_VictorSPX(2);
-  LeftBackMotor   = new WPI_VictorSPX(1);
-  RightFrontMotor = new WPI_VictorSPX(4);
+  LeftFrontMotor  = new WPI_VictorSPX(2); // can bus
+  LeftBackMotor   = new WPI_VictorSPX(1); //can bus
+  RightFrontMotor = new WPI_VictorSPX(4); //can bus
   RightBackMotor  = new WPI_VictorSPX(3); //4 on 2019 robot
 
-  RightShooter = new Spark(10);
-  LeftShooter = new Spark(11);
+  RightShooter = new Spark(3); //pwm
+  LeftShooter = new Spark(4);  //pwm
 
 
   //encodeur
@@ -122,7 +122,7 @@ public RobotMap() {
   //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
   
   //Wedger
-//.wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
+// wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
 
   //public static int NavX
 
