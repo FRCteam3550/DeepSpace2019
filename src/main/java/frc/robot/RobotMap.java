@@ -32,63 +32,42 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class RobotMap {
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
-
-  //public static int LeftFrontMotor = 1;
-  //public static int LeftBackMotor = 2;
   
-  //public static int RightFrontMotor = 3;
-  //public static int RightBackMotor = 4; TalonSRX(1);
   public static SpeedController LeftFrontMotor;
   public static SpeedController LeftBackMotor ;
   public static SpeedController RightFrontMotor;
   public static SpeedController RightBackMotor;
-
+  //shooter
   public static SpeedController RightShooter;
   public static SpeedController LeftShooter;
-
   //encodeur du drivetrain
   public static Encoder Left;
   public static Encoder Right;
-
   public static DigitalInput DriveTrainLightSensorL;
   public static DigitalInput DriveTrainLightSensorR;
-
+  //elevator
   public static TalonSRX elevatorMotor;
   public static Encoder elevatoEncoder;
-
-  //public static TalonSRX armMotor;
-  public static TalonSRX narmMotor;
-  //public static TalonSRX wedgerMotor;
- 
- // public static Encoder armEncoder;
-
-    //Wrist
+  //wedger
+  public static TalonSRX wedgerMotor;
+  //Grabber
   public static SpeedController grabberMotor;
- // public static DigitalInput wrsistLimit1;
- // public static DigitalInput wrsistLimit2;
-
   public static DigitalInput lightSensorGrabber;
-
-
- // public static DigitalInput limitSwitch1;
-  //public static DigitalInput limitSwitch2;
-
- // public static DigitalInput armLimit1;
-  //public static DigitalInput armLimit2;<
-
+  //Led
   public static PWM ledController;
+  //Grimpeur   
+  public static TalonSRX GrimpeurBrasDroit;
+  public static TalonSRX GrimpeurBrasGauche;
 
 public RobotMap() {
 
   ledController = new PWM(0);
 
     // Drive Train
-  LeftFrontMotor  = new WPI_VictorSPX(2); // can bus
-  LeftBackMotor   = new WPI_VictorSPX(1); //can bus
-  RightFrontMotor = new WPI_VictorSPX(4); //can bus
-  RightBackMotor  = new WPI_VictorSPX(3); //4 on 2019 robot
+  LeftFrontMotor  = new WPI_VictorSPX(1); // can bus
+  LeftBackMotor   = new WPI_VictorSPX(2); //can bus
+  RightFrontMotor = new WPI_VictorSPX(3); //can bus
+  RightBackMotor  = new WPI_VictorSPX(4); //4 on 2019 robot
 
   RightShooter = new Spark(3); //pwm
   LeftShooter = new Spark(4);  //pwm
@@ -103,32 +82,18 @@ public RobotMap() {
 
     //elevator
   elevatorMotor = new TalonSRX(5);  //4 on 2019 robot 
- // elevatoEncoder = new Encoder(4 , 5 , false , EncodingType.k4X);
-    
   
-  //aArm
-  //armMotor = new TalonSRX(9);  // 5 on 2019 robot
-  narmMotor = new TalonSRX(6);
- 
-  //armEncoder = new Encoder(6 , 7 , false , EncodingType.k4X);
-
     //grabber
   grabberMotor = new WPI_VictorSPX(7);  // 7 on 2019 robot
- // public static DigitalInput wrsistLimit1;
- // public static DigitalInput wrsistLimit2;
-
  lightSensorGrabber = new DigitalInput(5);
 
-  //public static DoubleSolenoid wristPiston = new DoubleSolenoid(8, 7);
-  
+  //grimpeur 
+GrimpeurBrasDroit = new TalonSRX(8);
+GrimpeurBrasGauche = new TalonSRX(9);
+
+
   //Wedger
-// wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
+ wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
 
-  //public static int NavX
-
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
 }
 }

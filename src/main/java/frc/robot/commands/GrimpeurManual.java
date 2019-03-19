@@ -10,10 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmMiddleCom extends Command {
-  public ArmMiddleCom() {
+public class GrimpeurManual extends Command {
+  public GrimpeurManual() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_armSub);
+    // eg. requires(chassis);
+    requires(Robot.m_grimpeur);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +25,7 @@ public class ArmMiddleCom extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_armSub.setArmPosition(4096);
+    Robot.m_grimpeur.set(Robot.m_oi.getGamePadY());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,11 +37,13 @@ public class ArmMiddleCom extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -8,25 +8,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
+import frc.robot.commands.*;
+import frc.robot.PIDsettings.*;
 
-public class MiddleHatchCom extends CommandGroup {
+public class Grimper extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public MiddleHatchCom() {
+  public Grimper() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
 
+    addSequential(new Monter() , 5);
+    addSequential(new Position1(4096), 5);
+    
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());
     // addSequential(new Command2());
     // Command1 and Command2 will run in parallel.
-    addParallel(new Position1(50));
-    addParallel(new ArmMiddleCom());
 
     // A command group will require all of the subsystems that each member
     // would require.

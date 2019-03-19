@@ -43,8 +43,9 @@ public class ElevateurSub extends Subsystem {
 		/* Configure Sensor Source for Pirmary PID */
 		m_elevator.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
 											Constants.kPIDLoopId0, 
-											Constants.kTimeoutMs0);
-
+                      Constants.kTimeoutMs0);
+                      
+                  
 		/**
 		 * Configure Talon SRX Output and Sesnor direction accordingly
 		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output

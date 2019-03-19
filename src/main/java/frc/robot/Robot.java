@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.*;
 //import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ArmSub;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.ElevateurSub;
 import frc.robot.subsystems.GrabberSub;
+import frc.robot.subsystems.GrimpeurSub;
 import frc.robot.subsystems.ShooterSub;
 //import frc.robot.subsystems.LidarSub;
 //import edu.wpi.first.wpilibj.I2C;
@@ -44,12 +44,11 @@ public class Robot extends TimedRobot {
  // public static LidarSub m_Lidar;
   public static ElevateurSub m_elevateur;
   public static GrabberSub m_grabberSub;
-  //public static Arm m_arm;
-  public static ArmSub m_armSub;
  //public static WedgerSub m_wedger;
  public static ShooterSub shooter;
 
   public static DriverStation m_driverStation;
+  public static GrimpeurSub m_grimpeur;
   public static String alliance;
   //private IntBuffer status;
 
@@ -65,11 +64,11 @@ public class Robot extends TimedRobot {
     m_RobotMap = new RobotMap();
     m_grabberSub = new GrabberSub();
     m_elevateur = new ElevateurSub();
+    m_grimpeur = new GrimpeurSub();
     //m_arm = new Arm();
    // m_armSub = new ArmSub();
     m_DriveBaseSub = new DriveBaseSub();
   //  m_wedger = new WedgerSub();
-    m_armSub = new ArmSub();
     shooter = new ShooterSub();
   
 
@@ -207,7 +206,6 @@ public class Robot extends TimedRobot {
     m_DriveBaseSub.resetLeftEncoder();
     m_DriveBaseSub.resetRightEncoder();
   //  m_wedger.resetWedger();
-    m_armSub.resetArmPosition();
 
   }
 
@@ -230,7 +228,7 @@ public class Robot extends TimedRobot {
   //Uncomment this if it doesn't update, or remove it if it does
   //SmartDashboardSubData();
  
- SmartDashboard.putData(m_armSub);
+  m_grimpeur.getArmPosition();
   m_elevateur.getMotorInfo();
  // m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
@@ -250,10 +248,10 @@ public class Robot extends TimedRobot {
 
   public void SmartDashboardSubData () {
     //Placing the Subsytem data into SmartDashboard
-    SmartDashboard.putData(m_armSub);
     SmartDashboard.putData(m_grabberSub);
     SmartDashboard.putData(m_elevateur);
     SmartDashboard.putData(m_DriveBaseSub);
+    
   //  SmartDashboard.putData(m_wedger);
   }
 }
