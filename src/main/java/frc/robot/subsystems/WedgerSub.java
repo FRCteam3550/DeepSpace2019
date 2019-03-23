@@ -29,6 +29,7 @@ public class WedgerSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private static TalonSRX m_wedgerMotor = RobotMap.wedgerMotor;
+  private static TalonSRX m_wedgerMobile = RobotMap.wedgerMobile;
 
   public WedgerSub(){ 
      m_wedgerMotor.configFactoryDefault();
@@ -71,9 +72,57 @@ public class WedgerSub extends Subsystem {
   
       //Zeroes the Sensor
       m_wedgerMotor.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+
+      //******************************************8************************** */
+
+      m_wedgerMobile.configFactoryDefault();
+      m_wedgerMobile.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs0);
+       
+            /* Configure Sensor Source for Pirmary PID */
+         m_wedgerMobile.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
+             Constants.kPIDLoopId0, 
+             Constants.kTimeoutMs0);
+       
+                       m_wedgerMobile.setNeutralMode(NeutralMode.Brake);    
+     //       /**
+            // * Configure Talon SRX Output and Sesnor direction accordingly
+            // * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
+          //  * Phase sensor to have positive increment when driving Talon Forward (Green LED)
+            
+       m_wedgerMobile.setSensorPhase(false); //false on the tests robot and True on the Year's robot
+        m_wedgerMobile.setInverted(false);
+       
+           /* Set relevant frame periods to be at least as fast as periodic rate */
+        m_wedgerMobile.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs0);
+        m_wedgerMobile.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs0);
+       
+           /* Set the peak and nominal outputs */
+        m_wedgerMobile.configNominalOutputForward(0, Constants.kTimeoutMs0);
+        m_wedgerMobile.configNominalOutputReverse(0, Constants.kTimeoutMs0);
+        m_wedgerMobile.configPeakOutputForward(1, Constants.kTimeoutMs0);
+        m_wedgerMobile.configPeakOutputReverse(-1, Constants.kTimeoutMs0);
+       
+       
+           /* Set Motion Magic gains in slot0 - see documentation */
+       m_wedgerMobile.selectProfileSlot(Constants.kSlotId0, Constants.kPIDLoopId0);
+        m_wedgerMobile.config_kF(Constants.kSlotId0, Constants.kGains0.kF, Constants.kTimeoutMs0);
+        m_wedgerMobile.config_kP(Constants.kSlotId0, Constants.kGains0.kP, Constants.kTimeoutMs0);
+        m_wedgerMobile.config_kI(Constants.kSlotId0, Constants.kGains0.kI, Constants.kTimeoutMs0);
+        m_wedgerMobile.config_kD(Constants.kSlotId0, Constants.kGains0.kD, Constants.kTimeoutMs0);
+       
+        m_wedgerMobile.configMotionCruiseVelocity(Constants.kCruiseVelocity0, Constants.kTimeoutMs0);
+        m_wedgerMobile.configMotionAcceleration(Constants.kAcceleration0, Constants.kTimeoutMs0);
+       
+           //Zeroes the Sensor
+        m_wedgerMobile.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+
  }
   public void initDefaultCommand() {
       setDefaultCommand(new WedgerManual());
+  }
+
+  public void setWedgerMotorSpeed(double speed){
+    m_wedgerMobile.set(ControlMode.PercentOutput, speed);
   }
 
   public void resetWedger(){

@@ -8,9 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class Monter extends Command {
+
+  private boolean RobotPret = false;
+  private double timer = 0;
+  
   public Monter() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_grimpeur);
@@ -24,7 +29,17 @@ public class Monter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_grimpeur.Monter();
+    timer++;
+    
+    if(timer <= 200){ // 4 secondes
+      Robot.m_grimpeur.Monter();
+    }else if(timer <= 400 && timer > 200){ // entre 4 et 8 secondes.
+      Robot.m_grimpeur.stopFront();
+      Robot.m_grimpeur.setBack(0.50);
+      RobotPret = true;
+    }
+
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,6 +51,7 @@ public class Monter extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    SmartDashboard.putBoolean("position robot PRET", RobotPret );
   }
 
   // Called when another command which requires one or more of the same

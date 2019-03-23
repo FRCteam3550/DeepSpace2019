@@ -101,6 +101,10 @@ public class DriveBaseSub extends Subsystem {
      setDefaultCommand(new ArcadeDrive());
   }
 
+  public void set(double speed){
+    m_leftFront.set(speed);
+  }
+
 
   public double getLeftDistance(){
     return m_Left.getDistance();

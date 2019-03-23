@@ -10,27 +10,30 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Position2 extends Command {
+public class GrimperStep5 extends Command {
 
-  private double position2;
+  private double v00 = 0; //a zero
+  private double v01 = 0; //a zero
+  private double v02 = 0; // a determiner
+  private double v03 = 0; // a determiner
   
-  public Position2(double position2) {
+  public GrimperStep5() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_elevateur);
-    this.position2 = position2;
-
+      requires(Robot.m_grimpeur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_elevateur.ConfigPos2();
+    Robot.m_grimpeur.setFront(v00);
+    Robot.m_grimpeur.setBack(v01);
+    Robot.m_grimpeur.setRoulette(v02);    
+    Robot.m_grimpeur.setDriveBase(v03);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevateur.goPos2(position2);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +45,6 @@ public class Position2 extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_elevateur.stop();
   }
 
   // Called when another command which requires one or more of the same

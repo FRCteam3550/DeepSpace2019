@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.*;
 //import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBaseSub;
-import frc.robot.subsystems.ElevateurSub;
-import frc.robot.subsystems.GrabberSub;
 import frc.robot.subsystems.GrimpeurSub;
 import frc.robot.subsystems.ShooterSub;
 //import frc.robot.subsystems.LidarSub;
@@ -25,7 +23,7 @@ import frc.robot.subsystems.ShooterSub;
 //import edu.wpi.first.wpilibj.I2C.Port;
 //import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
-//import frc.robot.subsystems.WedgerSub;
+import frc.robot.subsystems.WedgerSub;
 import edu.wpi.first.wpilibj.DriverStation;
 
 
@@ -42,9 +40,7 @@ public class Robot extends TimedRobot {
   public static DriveBaseSub m_DriveBaseSub;
   public static RobotMap m_RobotMap;
  // public static LidarSub m_Lidar;
-  public static ElevateurSub m_elevateur;
-  public static GrabberSub m_grabberSub;
- //public static WedgerSub m_wedger;
+ public static WedgerSub m_wedger;
  public static ShooterSub shooter;
 
   public static DriverStation m_driverStation;
@@ -62,13 +58,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_RobotMap = new RobotMap();
-    m_grabberSub = new GrabberSub();
-    m_elevateur = new ElevateurSub();
     m_grimpeur = new GrimpeurSub();
     //m_arm = new Arm();
    // m_armSub = new ArmSub();
     m_DriveBaseSub = new DriveBaseSub();
-  //  m_wedger = new WedgerSub();
+    m_wedger = new WedgerSub();
     shooter = new ShooterSub();
   
 
@@ -229,7 +223,7 @@ public class Robot extends TimedRobot {
   //SmartDashboardSubData();
  
   m_grimpeur.getArmPosition();
-  m_elevateur.getMotorInfo();
+ // m_elevateur.getMotorInfo();
  // m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
 
@@ -248,9 +242,9 @@ public class Robot extends TimedRobot {
 
   public void SmartDashboardSubData () {
     //Placing the Subsytem data into SmartDashboard
-    SmartDashboard.putData(m_grabberSub);
-    SmartDashboard.putData(m_elevateur);
+   // SmartDashboard.putData(m_elevateur);
     SmartDashboard.putData(m_DriveBaseSub);
+    SmartDashboard.putData(m_grimpeur);
     
   //  SmartDashboard.putData(m_wedger);
   }

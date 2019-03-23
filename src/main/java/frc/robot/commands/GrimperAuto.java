@@ -9,26 +9,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.*;
-import frc.robot.PIDsettings.*;
 
-public class Grimper extends CommandGroup {
+public class GrimperAuto extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Grimper() {
+
+  //en seconde. 
+   private double dureeTemps0 = 5;
+   private double dureeTemps1 = 0;
+   private double dureeTemps2 = 0;
+   private double dureeTemps3 = 0;
+   private double dureeTemps4 = 0;
+   private double dureeTemps5 = 0;
+
+  public GrimperAuto() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
 
-    addSequential(new Monter() , 5);
-   // addSequential(new (4096), 5);
-    
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());
     // addSequential(new Command2());
     // Command1 and Command2 will run in parallel.
+    addSequential(new GrimperStep0() , dureeTemps0);
+    addSequential(new GrimperStep1() , dureeTemps1);
+    addSequential(new GrimperStep2() , dureeTemps2);
+    addSequential(new GrimperStep3() , dureeTemps3);
+    addSequential(new GrimperStep4() , dureeTemps4);
+    addSequential(new GrimperStep5() , dureeTemps5);
 
     // A command group will require all of the subsystems that each member
     // would require.

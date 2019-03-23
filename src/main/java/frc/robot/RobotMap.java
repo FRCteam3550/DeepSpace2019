@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -46,28 +47,36 @@ public class RobotMap {
   public static DigitalInput DriveTrainLightSensorL;
   public static DigitalInput DriveTrainLightSensorR;
   //elevator
-  public static TalonSRX elevatorMotor;
+  public static TalonSRX grimpeurArriere;
+  public static TalonSRX grimpeurRoue;
   public static Encoder elevatoEncoder;
   //wedger
   public static TalonSRX wedgerMotor;
   //Grabber
-  public static SpeedController grabberMotor;
+  public static TalonSRX wedgerMobile;
   public static DigitalInput lightSensorGrabber;
   //Led
   public static PWM ledController;
   //Grimpeur   
   public static TalonSRX GrimpeurBrasDroit;
   public static TalonSRX GrimpeurBrasGauche;
+  public static VictorSPX Pusher;
 
 public RobotMap() {
 
   ledController = new PWM(0);
 
-    // Drive Train
-  LeftFrontMotor  = new WPI_VictorSPX(1); // can bus
-  LeftBackMotor   = new WPI_VictorSPX(2); //can bus
-  RightFrontMotor = new WPI_VictorSPX(3); //can bus
-  RightBackMotor  = new WPI_VictorSPX(4); //4 on 2019 robot
+    // Drive Train Competition
+  //LeftFrontMotor  = new WPI_VictorSPX(1); // can bus
+  //LeftBackMotor   = new WPI_VictorSPX(2); //can bus
+  //RightFrontMotor = new WPI_VictorSPX(3); //can bus
+  //RightBackMotor  = new WPI_VictorSPX(4); //
+
+  //Drive train Tests
+  LeftFrontMotor  = new WPI_TalonSRX(1); // can bus
+  LeftBackMotor   = new WPI_TalonSRX(2); //can bus
+  RightFrontMotor = new WPI_TalonSRX(3); //can bus
+  RightBackMotor  = new WPI_TalonSRX(4); //
 
   RightShooter = new Spark(3); //pwm
   LeftShooter = new Spark(4);  //pwm
@@ -81,15 +90,17 @@ public RobotMap() {
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
-  elevatorMotor = new TalonSRX(5);  //4 on 2019 robot 
+  grimpeurArriere = new TalonSRX(8);  //4 on 2019 robot 
+  grimpeurRoue = new TalonSRX(6);
   
     //grabber
-  grabberMotor = new WPI_VictorSPX(7);  // 7 on 2019 robot
+  wedgerMobile = new TalonSRX(7);  // 7 on 2019 robot
  lightSensorGrabber = new DigitalInput(5);
 
   //grimpeur 
-GrimpeurBrasDroit = new TalonSRX(8);
-GrimpeurBrasGauche = new TalonSRX(9);
+GrimpeurBrasDroit = new TalonSRX(6);
+GrimpeurBrasGauche = new TalonSRX(5);
+Pusher = new VictorSPX(9);
 
 
   //Wedger

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* must be accep3ompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
@@ -10,30 +10,31 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Aspirer extends Command {
-  public Aspirer() {
+public class GrimperStep2 extends Command {
+
+  private double v00 = 0; //a zero ou avec un turque
+  private double v01 = 0; //a zero ou avec un turque
+  private double v02 = 0; //a determiner
+  private double v03 = 0; //a determiner
+
+  public GrimperStep2() {
     // Use requires() here to declare subsystem dependencies
-     //requires(Robot.m_grabberSub);
+    requires(Robot.m_grimpeur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   // Robot.m_grabberSub.stopArmMotor();
-   // Robot.m_grabberSub.stopGrabberMotor();
-
+    Robot.m_grimpeur.setFront(v00);
+    Robot.m_grimpeur.setBack(v01);
+    Robot.m_grimpeur.setRoulette(v02);    
+    Robot.m_grimpeur.setDriveBase(v03);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //if(!Robot.m_grabberSub.getLightSensorValue()){
-    //  Robot.m_grabberSub.stopGrabberMotor();
-   // }else{
-    //  Robot.m_grabberSub.aspirer();
-   // }
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -44,7 +45,7 @@ public class Aspirer extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-   // Robot.m_grabberSub.stopGrabberMotor();
+    //delay a determiner
   }
 
   // Called when another command which requires one or more of the same

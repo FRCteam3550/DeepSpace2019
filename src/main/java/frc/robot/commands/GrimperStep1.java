@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -10,22 +11,30 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Position3 extends Command {
-  public Position3() {
+public class GrimperStep1 extends Command {
+
+  private double v00 = 0; // a determiner
+  private double v01 = 0; // a determiner
+  private double v02 = 0;
+  private double v03 = 0;
+
+  public GrimperStep1() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_elevateur);
+    requires(Robot.m_grimpeur);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_elevateur.ConfigPos2();
+    Robot.m_grimpeur.setFront(v00);
+    Robot.m_grimpeur.setBack(v01);
+    Robot.m_grimpeur.setRoulette(v02);    
+    Robot.m_grimpeur.setDriveBase(v03);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_elevateur.goPosition3(4096);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +46,10 @@ public class Position3 extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_elevateur.stop();
+//delay
+//or
+//limit switch
+
   }
 
   // Called when another command which requires one or more of the same
