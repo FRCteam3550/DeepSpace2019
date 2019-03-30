@@ -47,7 +47,7 @@ public class WedgerSub extends Subsystem {
      //  * Phase sensor to have positive increment when driving Talon Forward (Green LED)
        
      m_wedgerMotor.setSensorPhase(false); //false on the tests robot and True on the Year's robot
-      m_wedgerMotor.setInverted(false);
+      m_wedgerMotor.setInverted(true);
   
       /* Set relevant frame periods to be at least as fast as periodic rate */
       m_wedgerMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs0);
@@ -195,6 +195,26 @@ public class WedgerSub extends Subsystem {
     SmartDashboard.putNumber("wedger vel" , m_wedgerMotor.getSelectedSensorVelocity());
     SmartDashboard.putBoolean("wedger front sensor", m_wedgerMobile.getSensorCollection().isFwdLimitSwitchClosed());
     SmartDashboard.putBoolean("wedger back sensor", m_wedgerMobile.getSensorCollection().isRevLimitSwitchClosed());
+    SmartDashboard.putBoolean("wedger pos0", getStatusPos0());
+    SmartDashboard.putBoolean("wedger pos0", getStatusPos1());
+  }
+
+  public boolean getStatusPos0(){
+    boolean status = false;
+    if (m_wedgerMotor.getSelectedSensorPosition(Constants.kPIDLoopId0) == -400){
+      status = true;
+      
+    }
+    return status;
+  }
+
+  public boolean getStatusPos1(){
+    boolean status = false;
+    if (m_wedgerMotor.getSelectedSensorPosition(Constants.kPIDLoopId0) == 500){
+      status = true;
+      
+    }
+    return status;
   }
 
   public void setWedgerMobile(double speed){

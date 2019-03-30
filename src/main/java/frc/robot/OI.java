@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.PIDsettings.*;
 import frc.robot.commands.*;
-import frc.robot.commands.GrimperAuto;
 
 
 /**
@@ -43,6 +42,12 @@ Joystick Wedger;
 
     Button b10 = new JoystickButton(gamePad, 3);
     b10.whileHeld(new WedgerPos2(Constants.Wedger2));
+
+    Button b11 = new JoystickButton(gamePad, 4);
+    b11.whileHeld(new WedgerMobileBack());
+
+    Button b12 = new JoystickButton(gamePad, 5);
+    b12.whileHeld(new WegerMobileFront());
 
 
     //Grimpeuer 

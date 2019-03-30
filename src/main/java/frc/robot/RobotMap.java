@@ -61,6 +61,8 @@ public class RobotMap {
   public static TalonSRX GrimpeurBrasDroit;
   public static TalonSRX GrimpeurBrasGauche;
   public static VictorSPX Pusher;
+  public static DigitalInput HomePositionLeft;
+  public static DigitalInput HomePositionRight;
 
 public RobotMap() {
 
@@ -95,12 +97,15 @@ public RobotMap() {
   
     //grabber
   wedgerMobile = new TalonSRX(7);  // 7 on 2019 robot
- lightSensorGrabber = new DigitalInput(5);
+// lightSensorGrabber = new DigitalInput(5);
 
   //grimpeur 
 GrimpeurBrasDroit = new TalonSRX(6);
 GrimpeurBrasGauche = new TalonSRX(5);
 Pusher = new VictorSPX(9);
+HomePositionLeft = new DigitalInput(5);
+HomePositionRight = new DigitalInput(6);
+
 
 
   //Wedger

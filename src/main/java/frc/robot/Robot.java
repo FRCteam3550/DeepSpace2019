@@ -219,9 +219,10 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("leftEncoder", m_DriveBaseSub.getLeftDistance());
   SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
   SmartDashboard.putNumber("joysticck axe y , CoP", m_oi.CoPiloteY());  
-  SmartDashboard.putBoolean("lightsensor Grabber2", RobotMap.lightSensorGrabber.get());
+  //SmartDashboard.putBoolean("lightsensor Grabber2", RobotMap.lightSensorGrabber.get());
   m_wedger.getWedgerInfo();
   m_grimpeur.displayArmInfo();
+
   //  SmartDashboard.putBoolean("wedger front sensor", m_wedgerMobile.getSensorCollection().isRevLimitSwitchClosed());
  // SmartDashboard.putNumber("WedgerActualPosition", m_wedger.getPosition());
   //Uncomment this if it doesn't update, or remove it if it does

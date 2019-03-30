@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -39,6 +40,8 @@ public class GrimpeurSub extends Subsystem {
 public static TalonSRX m_grimpeurBrasGauche =  RobotMap.GrimpeurBrasGauche;
 public static TalonSRX m_grimpeurBrasDroit =  RobotMap.GrimpeurBrasDroit;
 public static VictorSPX m_pusher = RobotMap.Pusher;
+public static DigitalInput m_homePositionLeft = RobotMap.HomePositionLeft;
+public static DigitalInput m_homePositionRight = RobotMap.HomePositionRight;
 
 
 //back part of the grimpeur
@@ -259,12 +262,21 @@ public void resetArm(){
   m_grimpeurBrasDroit.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
 }
 
+public boolean getHomeStatusLeft(){
+  return m_homePositionLeft.get();
+}
+
+public boolean getHomeStatusRight(){
+  return m_homePositionRight.get();
+}
+
 public void displayArmInfo(){
   SmartDashboard.putBoolean("passed limit droit", getStatusDroit());
   SmartDashboard.putBoolean("passed limit gauche", getStatusGauche());
   SmartDashboard.putNumber("arm position droit", m_grimpeurBrasDroit.getSelectedSensorPosition(Constants.kPIDLoopId0));
   SmartDashboard.putNumber("arm position gauche", m_grimpeurBrasGauche.getSelectedSensorPosition(Constants.kPIDLoopId0));
-
+  SmartDashboard.putBoolean("at home pos left", getHomeStatusLeft());
+  SmartDashboard.putBoolean("at home pos Right", getHomeStatusRight());
 }
 
 public boolean getStatusDroit(){
