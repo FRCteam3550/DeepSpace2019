@@ -113,6 +113,10 @@ public class DriveBaseSub extends Subsystem {
     m_leftFront.set(speed);
   }
 
+  public double getAngle(){
+    return ahrs.getAngle();
+  }
+
 
   public double getLeftDistance(){
     return m_Left.getDistance();
