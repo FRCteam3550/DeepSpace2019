@@ -12,10 +12,10 @@ import frc.robot.Robot;
 
 public class GrimperStep5 extends Command {
 
-  private double v00 = 0; //a zero
-  private double v01 = 0; //a zero
-  private double v02 = 0; // a determiner
-  private double v03 = 0; // a determiner
+  private double v00 = 0; //seul element qui va bouger
+  private double v01 = 0;
+  private double v02 = 0.5;
+  private double v03 = 0;
   
   public GrimperStep5() {
     // Use requires() here to declare subsystem dependencies

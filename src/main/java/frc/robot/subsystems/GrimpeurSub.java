@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.GrimpeurManualFront;
+import frc.robot.commands.GrimpeurSRX;
 import frc.robot.commands.StopGrimpeur;
 import frc.robot.PIDsettings.*;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -178,7 +179,7 @@ private static TalonSRX m_grimpeurArriere = RobotMap.grimpeurArriere;
 
   public void getArmPosition(){
   SmartDashboard.putNumber("brasDroitGrimpeur", m_grimpeurBrasDroit.getSelectedSensorPosition());  
-  SmartDashboard.putNumber("brasDroitGrimpeur", m_grimpeurBrasGauche.getSelectedSensorPosition());  
+  SmartDashboard.putNumber("brasGaucheGrimpeur", m_grimpeurBrasGauche.getSelectedSensorPosition());  
   }
 
 
@@ -231,6 +232,15 @@ public void getEncoderPositionBrasGauce(){
   m_grimpeurBrasGauche.getSelectedSensorPosition();
 }
 
+public int getPositionDroit(){
+  return m_grimpeurBrasDroit.getSelectedSensorPosition();
+}
+
+public int getPositionGauche(){
+  return -1 *(m_grimpeurBrasGauche.getSelectedSensorPosition());
+}
+
+
 public double getDriveBasePosition(){
   
   double moyenne = 0;
@@ -244,11 +254,45 @@ public void setDriveBasePosition(){
   RobotMap.Left.reset();
 }
 
+public void resetArm(){
+  m_grimpeurBrasGauche.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+  m_grimpeurBrasDroit.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
+}
+
+public void displayArmInfo(){
+  SmartDashboard.putBoolean("passed limit droit", getStatusDroit());
+  SmartDashboard.putBoolean("passed limit gauche", getStatusGauche());
+  SmartDashboard.putNumber("arm position droit", m_grimpeurBrasDroit.getSelectedSensorPosition(Constants.kPIDLoopId0));
+  SmartDashboard.putNumber("arm position gauche", m_grimpeurBrasGauche.getSelectedSensorPosition(Constants.kPIDLoopId0));
+
+}
+
+public boolean getStatusDroit(){
+  boolean status = false;
+  if (Math.abs(m_grimpeurBrasDroit.getSelectedSensorPosition(Constants.kPIDLoopId0)) > 2580){
+    status = true;
+    
+  }
+  return status;
+}
+
+public boolean getStatusGauche(){
+  boolean status = false;
+  if (Math.abs(m_grimpeurBrasGauche.getSelectedSensorPosition(Constants.kPIDLoopId0)) > 2580){
+    status = true;
+    
+  }
+  return status;
+}
+
+
+
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new GrimpeurManualFront());
+   //setDefaultCommand(new GrimpeurSRX());
   }
   
 }

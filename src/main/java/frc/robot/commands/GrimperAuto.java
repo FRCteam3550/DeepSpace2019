@@ -16,12 +16,12 @@ public class GrimperAuto extends CommandGroup {
    */
 
   //en seconde. 
-   private double dureeTemps0 = 5;
-   private double dureeTemps1 = 0;
-   private double dureeTemps2 = 0;
-   private double dureeTemps3 = 0;
-   private double dureeTemps4 = 0;
-   private double dureeTemps5 = 0;
+   private double dureeTemps0 = 3;
+   private double dureeTemps1 = 7;
+   private double dureeTemps2 = 7;
+   private double dureeTemps3 = 4;
+   private double dureeTemps4 = 4;
+   private double dureeTemps5 = 4;
 
   public GrimperAuto() {
     // Add Commands here:
@@ -37,9 +37,9 @@ public class GrimperAuto extends CommandGroup {
     addSequential(new GrimperStep0() , dureeTemps0);
     addSequential(new GrimperStep1() , dureeTemps1);
     addSequential(new GrimperStep2() , dureeTemps2);
-    addSequential(new GrimperStep3() , dureeTemps3);
-    addSequential(new GrimperStep4() , dureeTemps4);
-    addSequential(new GrimperStep5() , dureeTemps5);
+   // addSequential(new GrimperStep3() , dureeTemps3);
+   // addSequential(new GrimperStep4() , dureeTemps4);
+   // addSequential(new GrimperStep5() , dureeTemps5);
 
     // A command group will require all of the subsystems that each member
     // would require.

@@ -13,8 +13,8 @@ import frc.robot.Robot;
 
 public class GrimperStep1 extends Command {
 
-  private double v00 = 0; // a determiner
-  private double v01 = 0; // a determiner
+  private double v00 = -0.25; //seul element qui va bouger
+  private double v01 = 0.74;
   private double v02 = 0;
   private double v03 = 0;
 

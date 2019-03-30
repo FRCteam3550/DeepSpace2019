@@ -199,7 +199,8 @@ public class Robot extends TimedRobot {
     }
     m_DriveBaseSub.resetLeftEncoder();
     m_DriveBaseSub.resetRightEncoder();
-  //  m_wedger.resetWedger();
+    m_wedger.resetWedger();
+    m_grimpeur.resetArm();
 
   }
 
@@ -211,17 +212,22 @@ public class Robot extends TimedRobot {
 
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("Speed", m_oi.returnPilote().getY());
+   // m_grimpeur.resetArm();
    // SmartDashboard.putNumber("Distance", m_Lidar.getDistance());
    
   //m_arm.armInfo();
   SmartDashboard.putNumber("leftEncoder", m_DriveBaseSub.getLeftDistance());
   SmartDashboard.putNumber("RightEncoder", m_DriveBaseSub.getRightDistance());
-  SmartDashboard.putNumber("joysticck axe y", m_oi.CoPiloteY());  
+  SmartDashboard.putNumber("joysticck axe y , CoP", m_oi.CoPiloteY());  
   SmartDashboard.putBoolean("lightsensor Grabber2", RobotMap.lightSensorGrabber.get());
+  m_wedger.getWedgerInfo();
+  m_grimpeur.displayArmInfo();
+  //  SmartDashboard.putBoolean("wedger front sensor", m_wedgerMobile.getSensorCollection().isRevLimitSwitchClosed());
  // SmartDashboard.putNumber("WedgerActualPosition", m_wedger.getPosition());
   //Uncomment this if it doesn't update, or remove it if it does
   //SmartDashboardSubData();
- 
+    SmartDashboard.putNumber("Joystick axe y, Pilote" , m_oi.returnPilote().getY());
+    SmartDashboard.putNumber("Joystick axe y , gamePad", m_oi.getGamePad().getY());
   m_grimpeur.getArmPosition();
  // m_elevateur.getMotorInfo();
  // m_wedger.getWedgerInfo();

@@ -34,12 +34,12 @@ public class ArcadeDrive extends Command {
   @Override
   protected void execute() {
     //un joystick pour avancer et tourner
-  Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
+  //Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
  
     //Robot.m_DriveBaseSub.set(Robot.m_oi.returnPilote().getY());
 
    //un joystick pour avancer et un joystick pour tourner
-//  Robot.m_DriveBaseSub.tankDrive(-Robot.m_oi.returnPilote().getY() , -Robot.m_oi.returnCoPilote().getY() );
+   Robot.m_DriveBaseSub.tankDrive(-Robot.m_oi.returnPilote().getY() , -Robot.m_oi.returnCoPilote().getY() );
 
 
   }

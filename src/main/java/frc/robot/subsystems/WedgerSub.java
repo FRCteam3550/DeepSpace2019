@@ -76,8 +76,8 @@ public class WedgerSub extends Subsystem {
       //******************************************8************************** */
 
       m_wedgerMobile.configFactoryDefault();
-      m_wedgerMobile.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs0);
-       
+      m_wedgerMobile.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.kTimeoutMs0);
+      
             /* Configure Sensor Source for Pirmary PID */
          m_wedgerMobile.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
              Constants.kPIDLoopId0, 
@@ -128,6 +128,7 @@ public class WedgerSub extends Subsystem {
   public void resetWedger(){
    //Zeroes the Sensor
    m_wedgerMotor.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0); 
+   m_wedgerMobile.setSelectedSensorPosition(0, Constants.kPIDLoopId0, Constants.kTimeoutMs0);
   }
 
   public void StopWedger(){
@@ -192,6 +193,12 @@ public class WedgerSub extends Subsystem {
   public void getWedgerInfo(){
     SmartDashboard.putNumber("wedger Pos", m_wedgerMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("wedger vel" , m_wedgerMotor.getSelectedSensorVelocity());
+    SmartDashboard.putBoolean("wedger front sensor", m_wedgerMobile.getSensorCollection().isFwdLimitSwitchClosed());
+    SmartDashboard.putBoolean("wedger back sensor", m_wedgerMobile.getSensorCollection().isRevLimitSwitchClosed());
+  }
+
+  public void setWedgerMobile(double speed){
+    m_wedgerMobile.set(ControlMode.PercentOutput , speed);
   }
 
 }

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -50,9 +51,16 @@ public class DriveBaseSub extends Subsystem {
   private static DigitalInput m_driveTrainLightSensorL = RobotMap.DriveTrainLightSensorL;
   private static DigitalInput m_driveTrainLightSensorR = RobotMap.DriveTrainLightSensorR;
 
-  
+   private static boolean m_boostMode = false;
+   private static boolean m_accelLimit = false;
+
+   private static double m_PrevRightOutput = 0;
+   private static double m_PrevLeftOutput = 0;
+
+
 
   public DriveBaseSub() {
+
     try {
       /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
@@ -142,9 +150,73 @@ public class DriveBaseSub extends Subsystem {
   }
 
   public void tankDrive(double LeftSpeed , double RightSpeed){
-    m_DiffDrive.tankDrive(LeftSpeed, RightSpeed);
+
+    double outputDiffAccel = 0.1;
+
+    double outputDiffDeccel = 0.3;
+
+    if(m_accelLimit == true){
+
+      if(LeftSpeed > m_PrevLeftOutput + outputDiffAccel){
+         LeftSpeed = m_PrevLeftOutput + outputDiffAccel;
+      }
+
+      if(RightSpeed > m_PrevRightOutput + outputDiffAccel){
+        RightSpeed = m_PrevRightOutput + outputDiffAccel;
+      }
+
+      if(LeftSpeed < m_PrevLeftOutput - outputDiffDeccel){
+        LeftSpeed = m_PrevLeftOutput - outputDiffDeccel;
+     }
+
+     if(RightSpeed < m_PrevRightOutput - outputDiffDeccel){
+       RightSpeed = m_PrevRightOutput - outputDiffDeccel;
+     }
+     
+    }
+
+    m_DiffDrive.tankDrive(LeftSpeed , LeftSpeed);
+    
+    m_PrevLeftOutput = LeftSpeed;
+    m_PrevRightOutput = RightSpeed;
+  }
+
+  public void toggleBoostMode(boolean m_boostModeONOFF){
+
+    if(m_boostModeONOFF == true){
+      m_boostModeONOFF = false;
+    }else{
+      m_boostModeONOFF = true;
+    }
   }
 
 
+   public void changeVmx(){
+
+//    boolean accelLimit = false;  
+    double cMaxMotors = 1.0f;
+    double cLimitedMotors = 0.85f;
+
+    if (m_boostMode == true)
+    {
+      m_accelLimit = false;
+      m_DiffDrive.setMaxOutput(cMaxMotors);
+    }
+    else
+    {
+      m_accelLimit = true;
+      m_DiffDrive.setMaxOutput(cLimitedMotors);
+    }
+  }
   
+  public void setBoostMode(double cLimitedMotors )
+  {
+    toggleBoostMode(m_boostMode);
+    changeVmx();
+  }
+
+   public void BoostModeState(){
+     SmartDashboard.putBoolean("boostModeState", m_boostMode);
+   }
+
 }

@@ -17,9 +17,9 @@ public class WadgerInitial extends Command {
 
   public WadgerInitial(double position) {
     // Use requires() here to declare subsystem dependencies
-    //requires(Robot.m_wedger);
+    requires(Robot.m_wedger);
 
-    //this.position = position;
+    this.position = position;
     //setTimeout(2);
   }
 
@@ -32,20 +32,20 @@ public class WadgerInitial extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   // Robot.m_wedger.goPos0(position);
+   Robot.m_wedger.goPos0(position);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    //SmartDashboard.putNumber("wedger Int_Pos", Robot.m_wedger.getPosition());
+    SmartDashboard.putNumber("wedger Int_Pos", Robot.m_wedger.getPosition());
    return false;//isTimedOut() || Robot.m_wedger.getPosition() < 20 ;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
- //   Robot.m_wedger.StopWedger();
+   Robot.m_wedger.StopWedger();
   }
 
   // Called when another command which requires one or more of the same

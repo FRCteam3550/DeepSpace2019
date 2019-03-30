@@ -30,23 +30,24 @@ Joystick Wedger;
 
   public OI(){
     pilote = new Joystick(1);
-    coPilote = new Joystick(0);
-    gamePad = new Joystick(2);
-    Wedger = new Joystick(3);
+    coPilote = new Joystick(0); // usb 0 for competition
+    gamePad = new Joystick(2);  
+   // Wedger = new Joystick(3);
     
     // wedger
-    Button b8 = new JoystickButton(gamePad, 9);
+    Button b8 = new JoystickButton(gamePad, 1);
     b8.whenPressed(new WadgerInitial(Constants.Wedger0));
 
-    Button b9 = new JoystickButton(gamePad, 10);
+    Button b9 = new JoystickButton(gamePad, 2);
     b9.whenPressed(new WedgerPos1(Constants.Wedger1));
 
-    Button b10 = new JoystickButton(gamePad, 11);
+    Button b10 = new JoystickButton(gamePad, 3);
     b10.whileHeld(new WedgerPos2(Constants.Wedger2));
 
+
     //Grimpeuer 
-    Button b13 = new JoystickButton(gamePad, 13);
-    b13.whenPressed(new GrimperAuto());
+   // Button b3 = new JoystickButton(gamePad, 3);
+    //b3.whenPressed(new GrimperAuto());
 
 
     //CoPilote force LED Color

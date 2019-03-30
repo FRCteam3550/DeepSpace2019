@@ -8,29 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import  frc.robot.subsystems.WedgerSub;
 
-public class WedgerManual extends Command {
-  public WedgerManual() {
+public class ToggleBoostMode extends Command {
+
+  public ToggleBoostMode() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_wedger);
+    requires(Robot.m_DriveBaseSub);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   // Robot.m_wedger.StopWedger();    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Robot.m_wedger.moveWedgerManual(Robot.m_oi.getGamePad().getX());
-    //Robot.m_wedger.getWedgerInfo();
-  // Robot.m_wedger.setWedgerMotorSpeed(Robot.m_oi.returnWedgerJoy().getY());
-    Robot.m_wedger.setWedgerMobile(Robot.m_oi.getGamePad().getX());
+    Robot.m_DriveBaseSub.setBoostMode(0.85);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +37,6 @@ public class WedgerManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.m_wedger.StopWedger();
   }
 
   // Called when another command which requires one or more of the same
