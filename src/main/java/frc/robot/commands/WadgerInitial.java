@@ -45,7 +45,7 @@ public class WadgerInitial extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-   Robot.m_wedger.StopWedger();
+   Robot.m_wedger.setWedgerMotorSpeed(0.05);
   }
 
   // Called when another command which requires one or more of the same

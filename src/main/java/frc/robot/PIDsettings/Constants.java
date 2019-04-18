@@ -142,12 +142,12 @@ public class Constants {
  
 	 //acceleration and velocity for slot 1
 	 public static final int kCruiseVelocityWedger1  = 25000;
-	 public static final int kAccelerationVWedger1  = 30000;
+	 public static final int kAccelerationVWedger1  = 15000;
  
 	 //gains for slot1
-	 public static final Gains kGainsWedger1  = new Gains(2, 0.0, 0.0, 0.2, 0, 1.0);
+	 public static final Gains kGainsWedger1  = new Gains(20 , 0.0, 0.0, 0, 0, 1.0);
  
-	 public static final double Wedger1  = 500;
+	 public static final double Wedger1  =900;
 
 
 //**************************************************************************************************** */

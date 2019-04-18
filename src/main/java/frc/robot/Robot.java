@@ -17,7 +17,7 @@ import edu.wpi.first.cameraserver.*;
 //import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBaseSub;
 import frc.robot.subsystems.GrimpeurSub;
-import frc.robot.subsystems.ShooterSub;
+import frc.robot.subsystems.Thrower;
 //import frc.robot.subsystems.LidarSub;
 //import edu.wpi.first.wpilibj.I2C;
 //import edu.wpi.first.wpilibj.I2C.Port;
@@ -41,11 +41,11 @@ public class Robot extends TimedRobot {
   public static RobotMap m_RobotMap;
  // public static LidarSub m_Lidar;
  public static WedgerSub m_wedger;
- public static ShooterSub shooter;
 
   public static DriverStation m_driverStation;
   public static GrimpeurSub m_grimpeur;
   public static String alliance;
+  public static Thrower Thrower;
   //private IntBuffer status;
 
   Command m_autonomousCommand;
@@ -63,7 +63,9 @@ public class Robot extends TimedRobot {
    // m_armSub = new ArmSub();
     m_DriveBaseSub = new DriveBaseSub();
     m_wedger = new WedgerSub();
-    shooter = new ShooterSub();
+  
+    Thrower = new Thrower();
+
   
 
     m_driverStation = DriverStation.getInstance();
@@ -199,7 +201,7 @@ public class Robot extends TimedRobot {
     }
     m_DriveBaseSub.resetLeftEncoder();
     m_DriveBaseSub.resetRightEncoder();
-    m_wedger.resetWedger();
+   // m_wedger.resetWedger();
     m_grimpeur.resetArm();
 
   }
@@ -233,6 +235,7 @@ public class Robot extends TimedRobot {
  // m_elevateur.getMotorInfo();
  // m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
+  m_DriveBaseSub.BoostModeState();
 
 
  // if(m_wedger.getPosition() <= 0 ){

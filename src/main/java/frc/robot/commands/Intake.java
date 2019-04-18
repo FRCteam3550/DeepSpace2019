@@ -12,44 +12,35 @@ import frc.robot.Robot;
 
 public class Intake extends Command {
 
-  double time;
-  public Intake(double time)
-  {
-    this.time = time;
-  }
-
   public Intake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    time = -1;
-    requires(Robot.shooter);
+    requires(Robot.Thrower);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.Thrower.throwBall();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooter.intake();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
 
-   if(time == -1)
-      return false;
-    else 
-      return time < timeSinceInitialized();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.shooter.stop();
+    Robot.Thrower.stop();
   }
 
   // Called when another command which requires one or more of the same

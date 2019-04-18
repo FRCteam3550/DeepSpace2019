@@ -29,8 +29,8 @@ public class WedgerManual extends Command {
   protected void execute() {
     //Robot.m_wedger.moveWedgerManual(Robot.m_oi.getGamePad().getX());
     //Robot.m_wedger.getWedgerInfo();
-  // Robot.m_wedger.setWedgerMotorSpeed(Robot.m_oi.returnWedgerJoy().getY());
-    Robot.m_wedger.setWedgerMobile(Robot.m_oi.getGamePad().getX());
+   Robot.m_wedger.setWedge(Robot.m_oi.getGamePad().getY()* 0.5);
+    //Robot.m_wedger.setWedgerMobile(Robot.m_oi.getGamePad().getY());
   }
 
   // Make this return true when this Command no longer needs to run execute()

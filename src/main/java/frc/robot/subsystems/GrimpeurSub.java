@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.GrimpeurManualFront;
-import frc.robot.commands.GrimpeurSRX;
 import frc.robot.commands.StopGrimpeur;
 import frc.robot.PIDsettings.*;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -39,13 +38,14 @@ public class GrimpeurSub extends Subsystem {
   //front part of the grimpeur
 public static TalonSRX m_grimpeurBrasGauche =  RobotMap.GrimpeurBrasGauche;
 public static TalonSRX m_grimpeurBrasDroit =  RobotMap.GrimpeurBrasDroit;
-public static VictorSPX m_pusher = RobotMap.Pusher;
+//public static VictorSPX m_pusher = RobotMap.Pusher;
 public static DigitalInput m_homePositionLeft = RobotMap.HomePositionLeft;
 public static DigitalInput m_homePositionRight = RobotMap.HomePositionRight;
 
 
 //back part of the grimpeur
-private static TalonSRX m_grimpeurArriere = RobotMap.grimpeurArriere;
+public static TalonSRX m_grimpeurArriere = RobotMap.grimpeurArriere;
+public static TalonSRX m_grimpeurRoue = RobotMap.grimpeurRoue;
 
 
   public GrimpeurSub(){
@@ -199,12 +199,12 @@ public void setBack(double speed){
   SmartDashboard.putNumber("IsEncoderInPhaseBackClimber", RobotMap.grimpeurArriere.getSelectedSensorVelocity(Constants.kPIDLoopId0));
 }
 
-public void setPusher(double speed){
-  m_pusher.set(ControlMode.PercentOutput, speed);
-}
+//public void setRoue(double speed){
+ // m_grimpeurRoue.set(ControlMode.PercentOutput, speed);
+//}
 
 public void setRoulette(double speed){
-  m_pusher.set(ControlMode.PercentOutput, speed);
+  m_grimpeurRoue.set(ControlMode.PercentOutput, speed);
 }
 
 public void setDriveBase(double speed){

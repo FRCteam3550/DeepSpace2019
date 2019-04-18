@@ -40,14 +40,36 @@ Joystick Wedger;
     Button b9 = new JoystickButton(gamePad, 2);
     b9.whenPressed(new WedgerPos1(Constants.Wedger1));
 
-    Button b10 = new JoystickButton(gamePad, 3);
-    b10.whileHeld(new WedgerPos2(Constants.Wedger2));
+    //Button b10 = new JoystickButton(gamePad, 3)
+   // b10.whileHeld(new WedgerPos2(Constants.Wedger2));
 
-    Button b11 = new JoystickButton(gamePad, 4);
+   Button speed = new JoystickButton(pilote, 1);
+   speed.whenPressed(new ToggleBoostMode());
+
+    Button b11 = new JoystickButton(gamePad, 6);
     b11.whileHeld(new WedgerMobileBack());
 
     Button b12 = new JoystickButton(gamePad, 5);
     b12.whileHeld(new WegerMobileFront());
+
+    Button b13 = new JoystickButton(gamePad,7 );
+    b13.whileHeld(new RouletteBackward());
+
+    Button b14 = new JoystickButton(gamePad, 8);
+    b14.whileHeld(new RouletteForward());
+    
+    Button copilote1 = new JoystickButton(gamePad, 11);
+    copilote1.whileHeld(new ArmUp());
+
+    Button copilote2 = new JoystickButton(gamePad, 12);
+    copilote2.whileHeld(new ArmDown());
+
+    Button bGrimper = new JoystickButton(gamePad, 3);
+    bGrimper.whileHeld(new GrimperBoutton());
+
+    Button bVision = new JoystickButton(coPilote, 1);
+    bVision.whileHeld(new gyroRotateCommand(5));
+
 
 
     //Grimpeuer 

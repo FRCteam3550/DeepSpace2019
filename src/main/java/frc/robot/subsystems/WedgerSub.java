@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+
 import frc.robot.PIDsettings.Constants;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -221,4 +223,10 @@ public class WedgerSub extends Subsystem {
     m_wedgerMobile.set(ControlMode.PercentOutput , speed);
   }
 
+
+  public void setWedge(double speed){
+    m_wedgerMotor.set(ControlMode.PercentOutput , speed);
+  }
+
+  
 }

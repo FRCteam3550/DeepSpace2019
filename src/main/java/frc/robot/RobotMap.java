@@ -38,9 +38,8 @@ public class RobotMap {
   public static SpeedController LeftBackMotor ;
   public static SpeedController RightFrontMotor;
   public static SpeedController RightBackMotor;
-  //shooter
-  public static SpeedController RightShooter;
-  public static SpeedController LeftShooter;
+  //thrower
+  public static Spark Thrower;
   //encodeur du drivetrain
   public static Encoder Left;
   public static Encoder Right;
@@ -60,7 +59,7 @@ public class RobotMap {
   //Grimpeur   
   public static TalonSRX GrimpeurBrasDroit;
   public static TalonSRX GrimpeurBrasGauche;
-  public static VictorSPX Pusher;
+  //public static VictorSPX Pusher;
   public static DigitalInput HomePositionLeft;
   public static DigitalInput HomePositionRight;
 
@@ -69,19 +68,16 @@ public RobotMap() {
   ledController = new PWM(0);
 
     // Drive Train Competition
-  //LeftFrontMotor  = new WPI_VictorSPX(1); // can bus
-  //LeftBackMotor   = new WPI_VictorSPX(2); //can bus
-  //RightFrontMotor = new WPI_VictorSPX(3); //can bus
-  //RightBackMotor  = new WPI_VictorSPX(4); //
+  LeftFrontMotor  = new WPI_VictorSPX(1); // can bus
+  LeftBackMotor   = new WPI_VictorSPX(2); //can bus
+  RightFrontMotor = new WPI_VictorSPX(3); //can bus
+  RightBackMotor  = new WPI_VictorSPX(4); //
 
   //Drive train Tests
-  LeftFrontMotor  = new WPI_TalonSRX(1); // can bus
-  LeftBackMotor   = new WPI_TalonSRX(2); //can bus
-  RightFrontMotor = new WPI_TalonSRX(3); //can bus
-  RightBackMotor  = new WPI_TalonSRX(4); //
-
-  RightShooter = new Spark(3); //pwm
-  LeftShooter = new Spark(4);  //pwm
+  //LeftFrontMotor  = new WPI_TalonSRX(1); // can bus
+  //LeftBackMotor   = new WPI_TalonSRX(2); //can bus
+  //RightFrontMotor = new WPI_TalonSRX(3); //can bus
+  //RightBackMotor  = new WPI_TalonSRX(4); //
 
 
   //encodeur
@@ -92,8 +88,8 @@ public RobotMap() {
   DriveTrainLightSensorR = new DigitalInput(9);
 
     //elevator
-  grimpeurArriere = new TalonSRX(8);  //4 on 2019 robot 
-  grimpeurRoue = new TalonSRX(6);
+  grimpeurArriere = new TalonSRX(5);  //4 on 2019 robot 
+  grimpeurRoue = new TalonSRX(13);
   
     //grabber
   wedgerMobile = new TalonSRX(7);  // 7 on 2019 robot
@@ -101,11 +97,12 @@ public RobotMap() {
 
   //grimpeur 
 GrimpeurBrasDroit = new TalonSRX(6);
-GrimpeurBrasGauche = new TalonSRX(5);
-Pusher = new VictorSPX(9);
+GrimpeurBrasGauche = new TalonSRX(8);
+//Pusher = new VictorSPX(9);
 HomePositionLeft = new DigitalInput(5);
 HomePositionRight = new DigitalInput(6);
-
+ //Thrower
+ Thrower = new Spark(15);
 
 
   //Wedger

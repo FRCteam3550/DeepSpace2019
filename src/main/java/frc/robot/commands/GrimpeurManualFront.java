@@ -42,29 +42,32 @@ public class GrimpeurManualFront extends Command {
 
     timelist = new ArrayList<>();
     gyroAnglelist = new ArrayList<>();
+
+    Robot.m_grimpeur.setFront(0);
   }
+
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
    //Robot.m_grimpeur.setBack(-Robot.m_oi.getGamePad().getY());
-   if ( Robot.m_oi.getGamePad().getRawButton(4)){
-    Robot.m_grimpeur.setFront(Robot.m_oi.getGamePad().getY());
-   }
-   else {
+  // if ( Robot.m_oi.getGamePad().getRawButton(4)){
+    //Robot.m_grimpeur.setFront(Robot.m_oi.getGamePad().getY());
+   //}
+   //else {
 
-  if (Robot.m_grimpeur.getPositionDroit() < 0 && Robot.m_oi.getGamePad().getY() < 0 ) {
-    Robot.m_grimpeur.setFront(0);
-  }
-  else {
-    Robot.m_grimpeur.setFront(Robot.m_oi.getGamePad().getY());
-  }
+  //if (Robot.m_grimpeur.getPositionDroit() < 0 && Robot.m_oi.getGamePad().getY() < 0 ) {
+    //Robot.m_grimpeur.setFront(0);
+  //}
+  //else {
+   // Robot.m_grimpeur.setFront(Robot.m_oi.getGamePad().getY());
+  //}
 }
 
   // Robot.m_grimpeur.setPusher(Robot.m_oi.returnCoPilote().getX());
-  }
+//}
 
-
+         
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

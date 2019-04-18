@@ -135,7 +135,9 @@ public class DriveBaseSub extends Subsystem {
     m_RightControlGroup.set(0);
   }
 
-
+  public double getAngle(){
+    return ahrs.getAngle();
+  }
 
   public void arcadeDrive(double xSpeed, double zRotation) {
     m_DiffDrive.arcadeDrive(xSpeed, zRotation);
@@ -175,7 +177,7 @@ public class DriveBaseSub extends Subsystem {
      
     }
 
-    m_DiffDrive.tankDrive(LeftSpeed , LeftSpeed);
+    m_DiffDrive.tankDrive(LeftSpeed , RightSpeed);
     
     m_PrevLeftOutput = LeftSpeed;
     m_PrevRightOutput = RightSpeed;
@@ -209,7 +211,7 @@ public class DriveBaseSub extends Subsystem {
     }
   }
   
-  public void setBoostMode(double cLimitedMotors )
+  public void setBoostMode()
   {
     toggleBoostMode(m_boostMode);
     changeVmx();

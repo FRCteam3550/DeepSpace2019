@@ -10,10 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class StopShooter extends Command {
-  public StopShooter() {
+public class RouletteBackward extends Command {
+  public RouletteBackward() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.shooter);
+    // eg. requires(chassis);
+    requires(Robot.m_grimpeur);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +25,7 @@ public class StopShooter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooter.stop();
+    Robot.m_grimpeur.setRoulette(-0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,7 +37,7 @@ public class StopShooter extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-  
+    Robot.m_grimpeur.setRoulette(0);
   }
 
   // Called when another command which requires one or more of the same
