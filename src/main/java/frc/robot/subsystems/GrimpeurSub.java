@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -20,10 +19,8 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.GrimpeurManualFront;
-import frc.robot.commands.StopGrimpeur;
 import frc.robot.PIDsettings.*;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
@@ -296,9 +293,6 @@ public boolean getStatusGauche(){
   }
   return status;
 }
-
-
-
 
   @Override
   public void initDefaultCommand() {

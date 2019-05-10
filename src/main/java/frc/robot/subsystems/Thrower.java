@@ -18,8 +18,6 @@ import frc.robot.commands.*;
 public class Thrower extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.\
-
-
   public static Spark m_thrower = RobotMap.Thrower;
 
   @Override
@@ -32,16 +30,15 @@ public class Thrower extends Subsystem {
   }
 
   public void throwBall(){
-    set(0.5);
+    set(0.25);
   }
 
   public void catchBall(){
-    set(-0.5);
+    set(-0.65);
   }
 
   public void stop(){
     set(0);
   }
-
-
+  
 }

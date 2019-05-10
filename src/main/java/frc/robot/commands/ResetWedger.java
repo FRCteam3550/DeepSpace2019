@@ -8,11 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
 public class ResetWedger extends Command {
 
-private double counter = 0;
+//rivate double counter = 0;
 
   public ResetWedger() {
     // Use requires() here to declare subsystem dependencies

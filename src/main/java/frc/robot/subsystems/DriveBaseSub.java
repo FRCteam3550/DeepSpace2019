@@ -18,11 +18,13 @@ import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
 /**
@@ -38,10 +40,10 @@ public class DriveBaseSub extends Subsystem {
 
   private DifferentialDrive m_DiffDrive;
 
-  private static SpeedController m_leftFront = RobotMap.LeftFrontMotor;
-  private static SpeedController m_leftBack = RobotMap.LeftBackMotor;
-  private static SpeedController m_RightFront = RobotMap.RightFrontMotor;
-  private static SpeedController m_RightBack = RobotMap.RightBackMotor;
+  private static WPI_VictorSPX m_leftFront = RobotMap.LeftFrontMotor;
+  private static WPI_VictorSPX m_leftBack = RobotMap.LeftBackMotor;
+  private static WPI_VictorSPX m_RightFront = RobotMap.RightFrontMotor;
+  private static WPI_VictorSPX m_RightBack = RobotMap.RightBackMotor;
 
   //encodeur 
   public static Encoder m_Right = RobotMap.Right;
@@ -54,8 +56,11 @@ public class DriveBaseSub extends Subsystem {
    private static boolean m_boostMode = false;
    private static boolean m_accelLimit = false;
 
+
    private static double m_PrevRightOutput = 0;
    private static double m_PrevLeftOutput = 0;
+
+   public static double m_previousXspeedOuput = 0;
 
 
 
@@ -78,11 +83,16 @@ public class DriveBaseSub extends Subsystem {
     m_RightControlGroup = new SpeedControllerGroup(m_RightFront, m_RightBack);
 
     m_DiffDrive = new DifferentialDrive(m_LeftControlGroup, m_RightControlGroup);
+    m_DiffDrive.setMaxOutput(0.9);
 
-    m_DiffDrive.setMaxOutput(0.90);
+    
+
+
+    //m_DiffDrive.setMaxOutput(0.70);
     //m_DiffDrive.setMaxOutput(0.85);
 
 
+   // m_RightBack.setNeutralMode(NeutralMode.Brake);    
 
     m_Left.setMaxPeriod(.1);
     m_Left.setMinRate(.1);
@@ -135,12 +145,35 @@ public class DriveBaseSub extends Subsystem {
     m_RightControlGroup.set(0);
   }
 
+  public void moveDriver(){
+    m_LeftControlGroup.set(0.3);
+    m_RightControlGroup.set(0.3);
+  }
+
   public double getAngle(){
     return ahrs.getAngle();
   }
 
-  public void arcadeDrive(double xSpeed, double zRotation) {
+
+
+  public void NarcadeDrive(double xSpeed, double zRotation) {
+
+    double outputDiffAccel = 0.1;
+    double outputDiffDeccel = 0.3;
+
+    if(m_accelLimit == true){
+      if(xSpeed > m_previousXspeedOuput + outputDiffAccel){
+        xSpeed = m_previousXspeedOuput + outputDiffAccel;
+      }
+
+      if(xSpeed < m_previousXspeedOuput - outputDiffDeccel){
+        xSpeed = m_previousXspeedOuput - outputDiffDeccel;
+      }
+    } 
+
     m_DiffDrive.arcadeDrive(xSpeed, zRotation);
+
+    m_previousXspeedOuput = xSpeed;
   }
 
   public void arcadeDrive(double xSpeed, double zRotation , boolean squareInputs) {
@@ -159,9 +192,7 @@ public class DriveBaseSub extends Subsystem {
 
     if(m_accelLimit == true){
 
-      if(LeftSpeed > m_PrevLeftOutput + outputDiffAccel){
-         LeftSpeed = m_PrevLeftOutput + outputDiffAccel;
-      }
+
 
       if(RightSpeed > m_PrevRightOutput + outputDiffAccel){
         RightSpeed = m_PrevRightOutput + outputDiffAccel;
@@ -183,13 +214,19 @@ public class DriveBaseSub extends Subsystem {
     m_PrevRightOutput = RightSpeed;
   }
 
-  public void toggleBoostMode(boolean m_boostModeONOFF){
+  public void toggleBoostMode(){
 
-    if(m_boostModeONOFF == true){
-      m_boostModeONOFF = false;
-    }else{
-      m_boostModeONOFF = true;
+  
+    if(m_boostMode == false){
+      m_boostMode = true;
+
+    }else if(m_boostMode == true){
+      m_boostMode = false;
+
     }
+
+    
+
   }
 
 
@@ -197,7 +234,7 @@ public class DriveBaseSub extends Subsystem {
 
 //    boolean accelLimit = false;  
     double cMaxMotors = 1.0f;
-    double cLimitedMotors = 0.85f;
+    double cLimitedMotors = 0.9f;
 
     if (m_boostMode == true)
     {
@@ -213,8 +250,10 @@ public class DriveBaseSub extends Subsystem {
   
   public void setBoostMode()
   {
-    toggleBoostMode(m_boostMode);
+    toggleBoostMode();
     changeVmx();
+    BoostModeState();
+    moveDriver();
   }
 
    public void BoostModeState(){

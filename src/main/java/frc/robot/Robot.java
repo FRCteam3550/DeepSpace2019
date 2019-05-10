@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import edu.wpi.first.cameraserver.*;
 //import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBaseSub;
@@ -25,6 +29,7 @@ import frc.robot.subsystems.Thrower;
 //import java.nio.IntBuffer;
 import frc.robot.subsystems.WedgerSub;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 
 /**
@@ -46,10 +51,19 @@ public class Robot extends TimedRobot {
   public static GrimpeurSub m_grimpeur;
   public static String alliance;
   public static Thrower Thrower;
+
+  // PDP paneauDistribution;
   //private IntBuffer status;
+
+  PowerDistributionPanel m_pdp;
+  int counter;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  String diagString = "";
+
+  
 
   /**
    * This function is run when the robot is first started up and should be
@@ -57,13 +71,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_pdp = new PowerDistributionPanel();
     m_RobotMap = new RobotMap();
-    m_grimpeur = new GrimpeurSub();
     //m_arm = new Arm();
    // m_armSub = new ArmSub();
     m_DriveBaseSub = new DriveBaseSub();
     m_wedger = new WedgerSub();
-  
+    m_grimpeur = new GrimpeurSub();
+
     Thrower = new Thrower();
 
   
@@ -235,7 +250,7 @@ public class Robot extends TimedRobot {
  // m_elevateur.getMotorInfo();
  // m_wedger.getWedgerInfo();
   m_oi.getJoyInfo();
-  m_DriveBaseSub.BoostModeState();
+ // m_DriveBaseSub.BoostModeState();
 
 
  // if(m_wedger.getPosition() <= 0 ){
@@ -249,7 +264,35 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+  public void printPDP() {
+    
 
+    SmartDashboard.putNumber("PDP Power", m_pdp.getTotalPower());
+    SmartDashboard.putNumber("PDP Voltage", m_pdp.getVoltage());
+    String currentString = "";
+    for(int i = 0; i < 15; i++){
+      currentString = currentString + i + ": " + m_pdp.getCurrent(i);
+    }
+    SmartDashboard.putString("PDP Currents", currentString);
+    SmartDashboard.putNumber("PDP Temperature", m_pdp.getTemperature());
+
+    diagString= diagString + ("PDP Currents" + currentString);
+    diagString= diagString + ("PDP Power" + currentString);
+    diagString= diagString + ("PDP Voltage" + currentString);
+    diagString= diagString + ("PDP Temperature" + currentString);
+
+    counter++;
+    if(counter%9000 == 0){
+      try {
+        PrintWriter writer = new PrintWriter("$HOME/diagLog" + System.nanoTime() + ".txt");
+        writer.println(diagString);
+        diagString = "";
+        writer.close();      
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
+  }
   public void SmartDashboardSubData () {
     //Placing the Subsytem data into SmartDashboard
    // SmartDashboard.putData(m_elevateur);

@@ -8,25 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.*;
 
-public class ToggleBoostMode extends Command {
-
-  public ToggleBoostMode() {
+public class SlowLeftTurn extends Command {
+  public SlowLeftTurn() {
     // Use requires() here to declare subsystem dependencies
-
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_DriveBaseSub.setBoostMode();
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+  //  Robot.m_DriveBaseSub.arcadeDrive( 0, -0.9, false);
+    Robot.m_DriveBaseSub.NarcadeDrive( 0, -0.9);
 
   }
 
@@ -39,7 +38,7 @@ public class ToggleBoostMode extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_DriveBaseSub.setBoostMode();
+    Robot.m_DriveBaseSub.stopRobot();
   }
 
   // Called when another command which requires one or more of the same

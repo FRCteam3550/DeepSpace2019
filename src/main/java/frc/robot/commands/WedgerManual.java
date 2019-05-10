@@ -8,9 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import  frc.robot.subsystems.WedgerSub;
 
 public class WedgerManual extends Command {
   public WedgerManual() {
@@ -29,7 +27,7 @@ public class WedgerManual extends Command {
   protected void execute() {
     //Robot.m_wedger.moveWedgerManual(Robot.m_oi.getGamePad().getX());
     //Robot.m_wedger.getWedgerInfo();
-   Robot.m_wedger.setWedge(Robot.m_oi.getGamePad().getY()* 0.5);
+  // Robot.m_wedger.setWedge(Robot.m_oi.getGamePad().getY()* 0.5);
     //Robot.m_wedger.setWedgerMobile(Robot.m_oi.getGamePad().getY());
   }
 

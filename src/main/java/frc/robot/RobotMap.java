@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -34,10 +34,10 @@ public class RobotMap {
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   
-  public static SpeedController LeftFrontMotor;
-  public static SpeedController LeftBackMotor ;
-  public static SpeedController RightFrontMotor;
-  public static SpeedController RightBackMotor;
+  public static WPI_VictorSPX LeftFrontMotor;
+  public static WPI_VictorSPX LeftBackMotor ;
+  public static WPI_VictorSPX RightFrontMotor;
+  public static WPI_VictorSPX RightBackMotor;
   //thrower
   public static Spark Thrower;
   //encodeur du drivetrain
@@ -72,6 +72,10 @@ public RobotMap() {
   LeftBackMotor   = new WPI_VictorSPX(2); //can bus
   RightFrontMotor = new WPI_VictorSPX(3); //can bus
   RightBackMotor  = new WPI_VictorSPX(4); //
+  LeftBackMotor.setNeutralMode(NeutralMode.Brake);
+  RightFrontMotor.setNeutralMode(NeutralMode.Brake);
+  LeftFrontMotor.setNeutralMode(NeutralMode.Brake);
+  RightBackMotor.setNeutralMode(NeutralMode.Brake);
 
   //Drive train Tests
   //LeftFrontMotor  = new WPI_TalonSRX(1); // can bus
@@ -99,12 +103,11 @@ public RobotMap() {
 GrimpeurBrasDroit = new TalonSRX(6);
 GrimpeurBrasGauche = new TalonSRX(8);
 //Pusher = new VictorSPX(9);
-HomePositionLeft = new DigitalInput(5);
+HomePositionLeft = new DigitalInput(5); 
 HomePositionRight = new DigitalInput(6);
  //Thrower
- Thrower = new Spark(15);
-
-
+ Thrower = new Spark(5);
+ 
   //Wedger
  wedgerMotor = new TalonSRX(12);  //8 o n 2019 robot
 

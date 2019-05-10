@@ -166,7 +166,7 @@ public class Constants {
 	 //gains for slot2
 	 public static final Gains kGainsWedger2  = new Gains(1, 0.0, 0.0, 0.2, 0, 1.0);
  
-	 public static final double Wedger2  = 1100;
+	 public static final double Wedger2  = 900;
 
 	 
 	 

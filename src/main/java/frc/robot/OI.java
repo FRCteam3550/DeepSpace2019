@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import frc.robot.PIDsettings.*;
 import frc.robot.commands.*;
 
@@ -25,12 +26,20 @@ Joystick pilote;
 Joystick coPilote;
 Joystick gamePad;
 Joystick Wedger;
+Joystick thrower;
 
+public Boolean useTwoSticks = false;
+
+  public void toggleSticks(){
+    useTwoSticks = !useTwoSticks;
+  }
 
   public OI(){
     pilote = new Joystick(1);
     coPilote = new Joystick(0); // usb 0 for competition
     gamePad = new Joystick(2);  
+    thrower = new Joystick(3);
+
    // Wedger = new Joystick(3);
     
     // wedger
@@ -43,8 +52,27 @@ Joystick Wedger;
     //Button b10 = new JoystickButton(gamePad, 3)
    // b10.whileHeld(new WedgerPos2(Constants.Wedger2));
 
+   Button rightturn = new POVButton(pilote, 90);
+   rightturn.whileHeld(new SlowRightRotation());
+
+   Button rightturn1 = new POVButton(pilote, 45);
+   rightturn1.whileHeld(new SlowRightRotation());
+
+   Button rightturn2 = new POVButton(pilote, 135);
+   rightturn2.whileHeld(new SlowRightRotation());
+
+
+   Button leftturn = new POVButton(pilote, 270);
+   leftturn.whileHeld(new SlowLeftTurn());
+   
+   Button leftturn2 = new POVButton(pilote, 225);
+   leftturn2.whileHeld(new SlowLeftTurn());
+
+   Button leftturn3 = new POVButton(pilote, 315);
+   leftturn3.whileHeld(new SlowLeftTurn());
+
    Button speed = new JoystickButton(pilote, 1);
-   speed.whenPressed(new ToggleBoostMode());
+   speed.whileHeld(new ToggleBoostMode());
 
     Button b11 = new JoystickButton(gamePad, 6);
     b11.whileHeld(new WedgerMobileBack());
@@ -67,8 +95,26 @@ Joystick Wedger;
     Button bGrimper = new JoystickButton(gamePad, 3);
     bGrimper.whileHeld(new GrimperBoutton());
 
+    
+    Button bdescendre = new JoystickButton(gamePad, 4);
+    bdescendre.whileHeld(new Descendrebouton());
+
     Button bVision = new JoystickButton(coPilote, 1);
     bVision.whileHeld(new gyroRotateCommand(5));
+
+    Button Thrower = new JoystickButton(gamePad, 9);
+    Thrower.whileHeld(new Intake());
+
+    Button Thrower2 = new JoystickButton(gamePad, 10);
+    Thrower2.whileHeld(new Outtake());
+
+    Button Forwards = new JoystickButton(pilote, 2);
+    Forwards.whileHeld(new Forwards());
+
+    Button Toggle = new JoystickButton(coPilote, 2);
+    Toggle.whenPressed(new toggleSticks());
+
+  
 
 
 

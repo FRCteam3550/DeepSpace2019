@@ -25,7 +25,13 @@ public class ArmUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_grimpeur.setFront(0.8);
+
+    if(Robot.m_grimpeur.getHomeStatusLeft() == false || Robot.m_grimpeur.getHomeStatusRight() == false){
+      Robot.m_grimpeur.setFront(0);
+    } else{
+       Robot.m_grimpeur.setFront(0.8);
+    }  
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

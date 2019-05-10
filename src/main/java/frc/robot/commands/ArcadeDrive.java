@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -18,6 +19,7 @@ import frc.robot.Robot;
 public class ArcadeDrive extends Command {
   //TuningPilotAxis m_forwardtuning;
   //TuningPilotAxis m_rotatetuning;
+
 
   public ArcadeDrive() {
     // Use requires() here to declare subsystem dependencies
@@ -33,9 +35,17 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
+    //Robot.m_DriveBaseSub.setBoostMode(Robot.m_DriveBaseSub.Robot.m_oi.returnPilote().getRawButton(1));
+
     // Arcade Drive version 1: 1 joystick : un joystick pour avancer et tourner axes y et x
-  Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX());
-  
+ // if (!Robot.m_oi.useTwoSticks)
+   //Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX() , false);
+   Robot.m_DriveBaseSub.NarcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getX()  );
+
+   // else
+  //  Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnCoPilote().getX(), false);
+   
   // Arcade Drive version 2: 1 joystick : un joystick pour avancer et tourner axes y et z
   
 //  Robot.m_DriveBaseSub.arcadeDrive(-Robot.m_oi.returnPilote().getY(),Robot.m_oi.returnPilote().getZ());
